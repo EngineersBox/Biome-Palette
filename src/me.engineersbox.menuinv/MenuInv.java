@@ -17,12 +17,6 @@ public class MenuInv extends JavaPlugin implements Listener {
                 Bukkit.getServer().getPluginManager().registerEvents(this, this);
         }
         
-        //@EventHandler
-        //public void onPlayerInteract(PlayerInteractEvent e) {
-        //        if (!(e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
-        //        menu.show(e.getPlayer());
-        //}
-        
         @SuppressWarnings("deprecation")
 		@EventHandler
     	public void onPlayerUse(PlayerInteractEvent event){
