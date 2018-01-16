@@ -1,14 +1,15 @@
 package me.engineersbox.menuinv;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.plugin.java.JavaPlugin;
  
 public class MenuInv extends JavaPlugin implements Listener {
- 
+	
         private Menu menu;
         
         public void onEnable() {
@@ -16,9 +17,19 @@ public class MenuInv extends JavaPlugin implements Listener {
                 Bukkit.getServer().getPluginManager().registerEvents(this, this);
         }
         
-        @EventHandler
-        public void onPlayerInteract(PlayerInteractEvent e) {
-                if (!(e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
-                menu.show(e.getPlayer());
-        }
+        //@EventHandler
+        //public void onPlayerInteract(PlayerInteractEvent e) {
+        //        if (!(e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
+        //        menu.show(e.getPlayer());
+        //}
+        
+        @SuppressWarnings("deprecation")
+		@EventHandler
+    	public void onPlayerUse(PlayerInteractEvent event){
+    	    Player p = event.getPlayer();
+    	 
+    	    if(p.getItemInHand().getType() == Material.BLAZE_POWDER){
+    	    	menu.show(event.getPlayer());
+    	    }
+    	}
 }
