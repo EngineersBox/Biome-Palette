@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.DyeColor;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -13,20 +12,22 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.Wool;
+import org.bukkit.material.Leaves;
+import org.bukkit.material.Sandstone;
+import org.bukkit.material.LongGrass;
 import org.bukkit.plugin.Plugin;
- 
+
 public class Menu implements Listener {
  
         private Inventory inv;
         private ItemStack f, d, s;
         
         public Menu(Plugin p) {
-                inv = Bukkit.getServer().createInventory(null, 9, "Biome Pallete");
+                inv = Bukkit.getServer().createInventory(null, 9, "Biome Palette");
                 
-                f = createItem(DyeColor.GREEN, ChatColor.GREEN + "Forest");
-                d = createItem(DyeColor.YELLOW, ChatColor.YELLOW + "Desert");
-                s = createItem(DyeColor.RED, ChatColor.RED + "Savanna");
+                f = createItem(ChatColor.GREEN + "Forest");
+                d = createItem1(ChatColor.YELLOW + "Desert");
+                s = createItem2(ChatColor.RED + "Savanna");
                 
                 inv.setItem(2, f);
                 inv.setItem(4, d);
@@ -35,13 +36,32 @@ public class Menu implements Listener {
                 Bukkit.getServer().getPluginManager().registerEvents(this, p);
         }
         
-        private ItemStack createItem(DyeColor dc, String name) {
-                ItemStack i = new Wool(dc).toItemStack(1);
+        @SuppressWarnings("deprecation")
+		private ItemStack createItem(String name) {
+                ItemStack i = new LongGrass(31, (byte) 1).toItemStack(1);
                 ItemMeta im = i.getItemMeta();
                 im.setDisplayName(name);
                 im.setLore(Arrays.asList("Change Biome Pallete", "To " + name.toLowerCase()));
                 i.setItemMeta(im);
                 return i;
+        }
+        
+        private ItemStack createItem1(String name) {
+            ItemStack i = new Sandstone().toItemStack(1);
+            ItemMeta im = i.getItemMeta();
+            im.setDisplayName(name);
+            im.setLore(Arrays.asList("Change Biome Pallete", "To " + name.toLowerCase()));
+            i.setItemMeta(im);
+            return i;
+        }
+        
+        private ItemStack createItem2(String name) {
+            ItemStack i = new Leaves().toItemStack(1);
+            ItemMeta im = i.getItemMeta();
+            im.setDisplayName(name);
+            im.setLore(Arrays.asList("Change Biome Pallete", "To " + name.toLowerCase()));
+            i.setItemMeta(im);
+            return i;
         }
         
         public void show(Player p) {
