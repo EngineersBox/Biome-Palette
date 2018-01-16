@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -54,23 +53,6 @@ public class Main extends JavaPlugin implements Listener {
 		BiomePalette.addItem(leaves, stone);
 	}
 	
-	
-	@EventHandler
-	public void onInventoryClick(InventoryClickEvent event) {
-		if(event.getInventory() == BiomePalette) {
-			if(event.getCurrentItem().getType() == Material.DIAMOND) {
-				event.setCancelled(true);
-				event.getWhoClicked().getInventory().addItem(new ItemStack(Material.APPLE));
-			}
-		}
-		if (!event.getInventory().getName().equalsIgnoreCase(BiomePalette.getName())) return;
-        if (event.getCurrentItem().getItemMeta() == null) return;
-        if (event.getCurrentItem().getItemMeta().getDisplayName().contains("Forest")) {
-                event.setCancelled(true);
-                event.getWhoClicked().closeInventory();
-        }
-	}
-     
 	
      @SuppressWarnings("deprecation")
 		@EventHandler
