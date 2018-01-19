@@ -1,5 +1,6 @@
 package me.engineersbox.menuinv;
 
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,8 +14,13 @@ public class EventList implements Listener {
     @EventHandler
     public void onPlayerClickGUI(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
-        //  ItemStack item = e.getCurrentItem();
+        //ItemStack item = e.getCurrentItem();
         int slot = e.getRawSlot();
+        
+        if ((e.getCurrentItem().getType() == Material.BEDROCK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
+        	p.closeInventory();
+        }
+        
         if (e.getInventory().getTitle().equals(ChatColor.DARK_PURPLE + "BlockPalette")) {
             if (e.getSlot() == -999) {
                 return;
@@ -22,9 +28,10 @@ public class EventList implements Listener {
 
             if (slot >= 0 && slot < 9) {
                 e.setCancelled(true);
-                p.sendMessage("Event Cancelled!");
+                //p.sendMessage("Event Cancelled!"); //debug
             }
         }
+        
 
     }
 
