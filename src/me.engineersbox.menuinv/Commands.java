@@ -19,6 +19,11 @@ public class Commands implements CommandExecutor {
 	
 		static {
 			
+			ItemStack exit = new ItemStack(Material.BEDROCK);
+            ItemMeta im0 = exit.getItemMeta();
+            im0.setDisplayName(ChatColor.GRAY + "EXIT");
+            exit.setItemMeta(im0);
+			
 			ItemStack plains = new ItemStack(Material.GRASS);
             ItemMeta im = plains.getItemMeta();
             im.setDisplayName(ChatColor.DARK_GREEN + "PLAINS");
@@ -27,9 +32,9 @@ public class Commands implements CommandExecutor {
             im.setLore(Lore);
             plains.setItemMeta(im);
             
-            ItemStack desert = new ItemStack(Material.SANDSTONE);
+            ItemStack desert = new ItemStack(Material.SAND);
             ItemMeta im1 = desert.getItemMeta();
-            im1.setDisplayName(ChatColor.DARK_RED + "DESERT");
+            im1.setDisplayName(ChatColor.GOLD + "DESERT");
             ArrayList<String> Lore1 = new ArrayList<String>();
             Lore1.add(ChatColor.YELLOW + "Biome Palette");
             im1.setLore(Lore1);
@@ -51,19 +56,30 @@ public class Commands implements CommandExecutor {
             im3.setLore(Lore3);
             extreme.setItemMeta(im3);
             
-            ItemStack ocean = new ItemStack(Material.PRISMARINE);
-            ItemMeta im4 = ocean.getItemMeta();
-            im4.setDisplayName(ChatColor.DARK_BLUE + "OCEAN");
+            ItemStack savanna = new ItemStack(Material.LOG_2);
+            ItemMeta im4 = savanna.getItemMeta();
+            im4.setDisplayName(ChatColor.DARK_RED + "SAVANNA");
             ArrayList<String> Lore4 = new ArrayList<String>();
             Lore4.add(ChatColor.YELLOW + "Biome Palette");
-            im4.setLore(Lore3);
-            ocean.setItemMeta(im4);
+            im4.setLore(Lore4);
+            savanna.setItemMeta(im4);
+            
+            ItemStack taiga = new ItemStack(Material.SNOW_BLOCK);
+            ItemMeta im5 = taiga.getItemMeta();
+            im5.setDisplayName(ChatColor.WHITE + "TAIGA");
+            ArrayList<String> Lore5 = new ArrayList<String>();
+            Lore5.add(ChatColor.YELLOW + "Biome Palette");
+            im5.setLore(Lore5);
+            taiga.setItemMeta(im5);
 			
             inv.setItem(0, plains);
             inv.setItem(1, desert);
             inv.setItem(2, forest);
             inv.setItem(3, extreme);
-            inv.setItem(4, ocean);
+            inv.setItem(4, savanna);
+            inv.setItem(5, taiga);
+            
+            inv.setItem(8, exit);
             
 		}
 	
