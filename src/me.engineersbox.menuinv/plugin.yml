@@ -5,5 +5,5 @@ author: EngineersBox
 description: Block Biome Palettes
 commands:
     bp:
-        description: Gives You The Biome-Specific Block Palette
+        description: Opens The Block Palette For Biome Alt Textures
         usage: /bp
