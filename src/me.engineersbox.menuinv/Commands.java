@@ -15,7 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class Commands implements CommandExecutor {
 
-	public final static Inventory inv = Bukkit.createInventory(null, 9, ChatColor.DARK_PURPLE + "BlockPalette");
+	public final static Inventory main = Bukkit.createInventory(null, 9, ChatColor.DARK_PURPLE + "[BlockPalette]");
 	
 		static {
 			
@@ -72,24 +72,24 @@ public class Commands implements CommandExecutor {
             im5.setLore(Lore5);
             taiga.setItemMeta(im5);
 			
-            inv.setItem(0, plains);
-            inv.setItem(1, desert);
-            inv.setItem(2, forest);
-            inv.setItem(3, extreme);
-            inv.setItem(4, savanna);
-            inv.setItem(5, taiga);
+            main.setItem(0, plains);
+            main.setItem(1, desert);
+            main.setItem(2, forest);
+            main.setItem(3, extreme);
+            main.setItem(4, savanna);
+            main.setItem(5, taiga);
             
-            inv.setItem(8, exit);
+            main.setItem(8, exit);
             
 		}
-	
+		
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
         if (sender instanceof Player) {
             Player p = (Player) sender;
             if (cmd.getName().equalsIgnoreCase("bp")) {
-                p.openInventory(inv);
+                p.openInventory(main);
             }
         }
 
