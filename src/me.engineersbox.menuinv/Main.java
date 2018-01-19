@@ -1,18 +1,19 @@
 package me.engineersbox.menuinv;
 
-
-import org.bukkit.event.Listener;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-
-public class Main extends JavaPlugin implements Listener{
-	
-	public void onEnable() {
-		
-		this.getLogger().info("BlockPalette Enabled");
-	     
-        getCommand("blockpalette").setExecutor(new Cmd());
-		
-	}
-	
+public class Main extends JavaPlugin {
+	 
+    @Override
+    public void onEnable() {
+        Bukkit.getServer().getPluginManager().registerEvents(new EventList(), this);
+        getCommand("bp").setExecutor(new Commands());
+    }
+ 
+    @Override
+    public void onDisable() {
+     
+    }
+ 
 }
