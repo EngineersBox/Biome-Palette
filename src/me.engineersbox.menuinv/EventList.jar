@@ -15,6 +15,74 @@ import org.bukkit.inventory.meta.ItemMeta;
 import net.md_5.bungee.api.ChatColor;
 
 public class EventList implements Listener {
+	
+	public final static Inventory main = Bukkit.createInventory(null, 9, ChatColor.DARK_PURPLE + "[BlockPalette]");
+	
+	static {
+		
+		ItemStack exit = new ItemStack(Material.BEDROCK);
+        ItemMeta im0 = exit.getItemMeta();
+        im0.setDisplayName(ChatColor.GRAY + "EXIT");
+        exit.setItemMeta(im0);
+		
+		ItemStack plains = new ItemStack(Material.GRASS);
+        ItemMeta im = plains.getItemMeta();
+        im.setDisplayName(ChatColor.DARK_GREEN + "PLAINS");
+        ArrayList<String> Lore = new ArrayList<String>();
+        Lore.add(ChatColor.YELLOW + "Biome Palette");
+        im.setLore(Lore);
+        plains.setItemMeta(im);
+        
+        ItemStack desert = new ItemStack(Material.SAND);
+        ItemMeta im1 = desert.getItemMeta();
+        im1.setDisplayName(ChatColor.GOLD + "DESERT");
+        ArrayList<String> Lore1 = new ArrayList<String>();
+        Lore1.add(ChatColor.YELLOW + "Biome Palette");
+        im1.setLore(Lore1);
+        desert.setItemMeta(im1);
+        
+        ItemStack forest = new ItemStack(Material.LEAVES);
+        ItemMeta im2 = forest.getItemMeta();
+        im2.setDisplayName(ChatColor.GREEN + "FOREST");
+        ArrayList<String> Lore2 = new ArrayList<String>();
+        Lore2.add(ChatColor.YELLOW + "Biome Palette");
+        im2.setLore(Lore2);
+        forest.setItemMeta(im2);
+        
+        ItemStack extreme = new ItemStack(Material.STONE);
+        ItemMeta im3 = extreme.getItemMeta();
+        im3.setDisplayName(ChatColor.DARK_GRAY + "EXTREME HILLS");
+        ArrayList<String> Lore3 = new ArrayList<String>();
+        Lore3.add(ChatColor.YELLOW + "Biome Palette");
+        im3.setLore(Lore3);
+        extreme.setItemMeta(im3);
+        
+        ItemStack savanna = new ItemStack(Material.LOG_2);
+        ItemMeta im4 = savanna.getItemMeta();
+        im4.setDisplayName(ChatColor.DARK_RED + "SAVANNA");
+        ArrayList<String> Lore4 = new ArrayList<String>();
+        Lore4.add(ChatColor.YELLOW + "Biome Palette");
+        im4.setLore(Lore4);
+        savanna.setItemMeta(im4);
+        
+        ItemStack taiga = new ItemStack(Material.SNOW_BLOCK);
+        ItemMeta im5 = taiga.getItemMeta();
+        im5.setDisplayName(ChatColor.WHITE + "TAIGA");
+        ArrayList<String> Lore5 = new ArrayList<String>();
+        Lore5.add(ChatColor.YELLOW + "Biome Palette");
+        im5.setLore(Lore5);
+        taiga.setItemMeta(im5);
+		
+        main.setItem(0, plains);
+        main.setItem(1, desert);
+        main.setItem(2, forest);
+        main.setItem(3, extreme);
+        main.setItem(4, savanna);
+        main.setItem(5, taiga);
+        
+        main.setItem(8, exit);
+        
+	}
 
 	public final static Inventory desert = Bukkit.createInventory(null, 9 * 5, ChatColor.DARK_PURPLE + "[BlockPalette] " + ChatColor.GOLD + "Desert");
 
@@ -25,7 +93,28 @@ public class EventList implements Listener {
         im0.setDisplayName(ChatColor.GRAY + "EXIT");
         exit.setItemMeta(im0);
         
-        ItemStack sand_layer = new ItemStack(Material.SNOW_BLOCK);
+        ItemStack back = new ItemStack(Material.BOOK);
+        ItemMeta im1 = back.getItemMeta();
+        im1.setDisplayName(ChatColor.DARK_RED + "BACK TO MAIN");
+        back.setItemMeta(im1);
+        
+        ItemStack prev = new ItemStack(Material.PAPER);
+        ItemMeta im2 = prev.getItemMeta();
+        im2.setDisplayName(ChatColor.DARK_GREEN + "Previous Page");
+        prev.setItemMeta(im2);
+
+        ItemStack eye = new ItemStack(Material.EYE_OF_ENDER);
+        ItemMeta im3 = eye.getItemMeta();
+        im3.setDisplayName(ChatColor.DARK_RED + "");
+        eye.setItemMeta(im3);
+        
+        ItemStack next = new ItemStack(Material.PAPER);
+        ItemMeta im4 = next.getItemMeta();
+        im4.setDisplayName(ChatColor.DARK_GREEN + "Next Page");
+        next.setItemMeta(im4);
+        
+        
+        ItemStack sand_layer = new ItemStack(Material.SNOW, 1);
         ItemMeta im = sand_layer.getItemMeta();
         im.setDisplayName(ChatColor.GOLD + "SAND LAYER");
         ArrayList<String> Lore = new ArrayList<String>();
@@ -35,6 +124,11 @@ public class EventList implements Listener {
         sand_layer.setItemMeta(im);
 		
         desert.setItem(0, sand_layer);
+        desert.setItem(39, prev);
+        desert.setItem(40, eye);
+        desert.setItem(41, next);
+        
+        desert.setItem(36, back);
         desert.setItem(44, exit);
 	}
 	 
@@ -44,12 +138,7 @@ public class EventList implements Listener {
         //ItemStack item = e.getCurrentItem();
         int slot = e.getRawSlot();
         
-        if ((e.getCurrentItem().getType() == Material.BEDROCK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
-        	p.closeInventory();
-        }
-        
-        
-        if (e.getInventory().getTitle().equals(ChatColor.DARK_PURPLE + "[BlockPalette]")) {
+        if (e.getInventory().getTitle().equals(ChatColor.DARK_PURPLE + "[BlockPalette]")) { //main inventory
             if (e.getSlot() == -999) {
                 return;
             }
@@ -59,12 +148,16 @@ public class EventList implements Listener {
                 //p.sendMessage("Event Cancelled!"); //debug
             }
             
+            if ((e.getCurrentItem().getType() == Material.BEDROCK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
+            	p.closeInventory();
+            }
+            
             if ((e.getCurrentItem().getType() == Material.SAND) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "DESERT"))) {
             	p.openInventory(desert);
             }
         }
         
-        if (e.getInventory().getTitle().equals(ChatColor.DARK_PURPLE + "[BlockPalette] " + ChatColor.GOLD + "Desert")) {
+        if (e.getInventory().getTitle().equals(ChatColor.DARK_PURPLE + "[BlockPalette] " + ChatColor.GOLD + "Desert")) { //desert inventory
             if (e.getSlot() == -999) {
                 return;
             }
@@ -72,6 +165,14 @@ public class EventList implements Listener {
             if (slot >= 0 && slot < 9 * 5) {
                 e.setCancelled(true);
                 //p.sendMessage("Event Cancelled!"); //debug
+            }
+            
+            if ((e.getCurrentItem().getType() == Material.BEDROCK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
+            	p.closeInventory();
+            }
+            
+            if ((e.getCurrentItem().getType() == Material.BOOK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "BACK TO MAIN"))) {
+            	p.openInventory(main);
             }
         
         }
