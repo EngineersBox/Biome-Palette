@@ -1,0 +1,31 @@
+package me.engineersbox.menuinv;
+
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+
+import net.md_5.bungee.api.ChatColor;
+
+public class EventList implements Listener {
+
+	 
+    @EventHandler
+    public void onPlayerClickGUI(InventoryClickEvent e) {
+        Player p = (Player) e.getWhoClicked();
+        //  ItemStack item = e.getCurrentItem();
+        int slot = e.getRawSlot();
+        if (e.getInventory().getTitle().equals(ChatColor.DARK_PURPLE + "BlockPalette")) {
+            if (e.getSlot() == -999) {
+                return;
+            }
+
+            if (slot >= 0 && slot < 9) {
+                e.setCancelled(true);
+                p.sendMessage("Event Cancelled!");
+            }
+        }
+
+    }
+
+}
