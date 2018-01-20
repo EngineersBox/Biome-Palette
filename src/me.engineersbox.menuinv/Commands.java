@@ -15,11 +15,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class Commands implements CommandExecutor {
 	
-	public final static Inventory main = Bukkit.createInventory(null, 9, ChatColor.DARK_PURPLE + "[BlockPalette]");
+	public final static Inventory main = Bukkit.createInventory(null, 9 * 3, ChatColor.DARK_PURPLE + "[BlockPalette]");
 	
 	static {
 		
-		ItemStack exit = new ItemStack(Material.BEDROCK);
+		ItemStack exit = new ItemStack(Material.OBSIDIAN);
         ItemMeta im0 = exit.getItemMeta();
         im0.setDisplayName(ChatColor.GRAY + "EXIT");
         exit.setItemMeta(im0);
@@ -71,15 +71,40 @@ public class Commands implements CommandExecutor {
         Lore5.add(ChatColor.YELLOW + "Biome Palette");
         im5.setLore(Lore5);
         taiga.setItemMeta(im5);
-		
-        main.setItem(0, plains);
-        main.setItem(1, desert);
-        main.setItem(2, forest);
-        main.setItem(3, extreme);
-        main.setItem(4, savanna);
-        main.setItem(5, taiga);
         
-        main.setItem(8, exit);
+        ItemStack ocean = new ItemStack(Material.PRISMARINE);
+        ItemMeta im6 = ocean.getItemMeta();
+        im6.setDisplayName(ChatColor.DARK_BLUE + "OCEAN");
+        ArrayList<String> Lore6 = new ArrayList<String>();
+        Lore6.add(ChatColor.YELLOW + "Biome Palette");
+        im6.setLore(Lore6);
+        ocean.setItemMeta(im6);
+        
+        ItemStack pane = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7);
+        ItemMeta im7 = pane.getItemMeta();
+        im7.setDisplayName(ChatColor.GRAY + "");
+        pane.setItemMeta(im7);
+		
+        int slot = 0;
+        
+        while(slot < 27) {
+        	if((slot > 9) && (slot < 17) || (slot == 22)) {
+        		slot = slot + 1;
+        	} else {
+        		main.setItem(slot, pane);
+        		slot = slot + 1;
+        	}
+        }
+
+        main.setItem(10, plains);
+        main.setItem(11, desert);
+        main.setItem(12, forest);
+        main.setItem(13, extreme);
+        main.setItem(14, savanna);
+        main.setItem(15, taiga);
+        main.setItem(16, ocean);
+        
+        main.setItem(22, exit);
         
 	}
 		
