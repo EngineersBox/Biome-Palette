@@ -1,9 +1,12 @@
-name: BiomePalette
+name: BlockPalette
 main: me.engineersbox.menuinv.Main
 version: 1.0 (alpha)
 author: EngineersBox
 description: Block Biome Palettes
 commands:
     bp:
-        description: Opens The Block Palette For Biome Alt Textures
+        description: Opens The Block Palette For Biome Specific Textures
         usage: /bp
+    bp-help:
+        description: Displays All Help Options For BlockPalette
+        usage: /bp-help
