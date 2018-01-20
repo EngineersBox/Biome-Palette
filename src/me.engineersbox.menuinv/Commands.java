@@ -12,10 +12,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
 public class Commands implements CommandExecutor {
 	
-	public final static Inventory main = Bukkit.createInventory(null, 9 * 3, ChatColor.DARK_PURPLE + "[BlockPalette]");
+	public final static Inventory main = Bukkit.createInventory(null, 9 * 3, ChatColor.DARK_RED + "           [" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] ");
 	
 	static {
 		
@@ -107,18 +106,34 @@ public class Commands implements CommandExecutor {
         main.setItem(22, exit);
         
 	}
-		
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
         if (sender instanceof Player) {
             Player p = (Player) sender;
             if (cmd.getName().equalsIgnoreCase("bp")) {
+            	p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Opening Palette!");
                 p.openInventory(main);
             }
         }
+        
+        if (sender instanceof Player) {
+            Player p = (Player) sender;
+            if (cmd.getName().equalsIgnoreCase("bp-help")) {
+            	p.sendMessage("");
+            	p.sendMessage(ChatColor.DARK_GRAY + "----={<" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Help" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
+            	p.sendMessage("");
+            	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Opens The Block Palette Interface");
+            	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/version BlockPalette " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays The Plugin Version And Author");
+            	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp-help " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Opens This Menu");
+            	p.sendMessage("");
+            	p.sendMessage(ChatColor.DARK_GRAY + "----=<{" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Help" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
+            	p.sendMessage("");
+            }
+        }
 
-        return false;
+        return true;
      
     }
 
