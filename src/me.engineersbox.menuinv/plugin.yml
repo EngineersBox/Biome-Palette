@@ -7,6 +7,9 @@ commands:
     bp:
         description: Opens The Block Palette For Biome Specific Textures
         usage: /bp
-    bp-help:
+    bp help:
         description: Displays All Help Options For BlockPalette
-        usage: /bp-help
+        usage: /bp help
+    bp tool:
+        description: Gives Block Biome Tool
+        usage: /bp tool
