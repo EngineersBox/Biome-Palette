@@ -91,7 +91,7 @@ public class Commands implements CommandExecutor {
         		slot = slot + 1;
         	} else {
         		main.setItem(slot, pane);
-        		slot = slot + 1;
+        		slot += 1;
         	}
         }
 
@@ -110,31 +110,43 @@ public class Commands implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
+    	Player p = (Player) sender;
+    	
         if (sender instanceof Player) {
-            Player p = (Player) sender;
+        	
             if (cmd.getName().equalsIgnoreCase("bp")) {
-            	p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Opening Palette!");
-                p.openInventory(main);
+            	
+            	if (args.length == 0) {
+            		
+            		p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Opening Palette!");
+                    p.openInventory(main);
+                    
+            	} else if (args.length == 1) {
+            		
+            		if (args[0].equalsIgnoreCase("help")) {
+            			
+            		p.sendMessage("");
+                	p.sendMessage(ChatColor.DARK_GRAY + "----={<" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Help" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
+                	p.sendMessage("");
+                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Opens The Block Palette Interface");
+                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/version BlockPalette " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays The Plugin Version And Author");
+                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp help " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Opens This Menu");
+                	p.sendMessage("");
+                	p.sendMessage(ChatColor.DARK_GRAY + "----=<{" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Help" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
+                	p.sendMessage("");
+                	
+            		} else {
+            			p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Invalid command!");
+            		}
+            	}
+
             }
+            
+            return true;
+            
         }
         
-        if (sender instanceof Player) {
-            Player p = (Player) sender;
-            if (cmd.getName().equalsIgnoreCase("bp-help")) {
-            	p.sendMessage("");
-            	p.sendMessage(ChatColor.DARK_GRAY + "----={<" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Help" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
-            	p.sendMessage("");
-            	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Opens The Block Palette Interface");
-            	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/version BlockPalette " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays The Plugin Version And Author");
-            	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp-help " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Opens This Menu");
-            	p.sendMessage("");
-            	p.sendMessage(ChatColor.DARK_GRAY + "----=<{" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Help" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
-            	p.sendMessage("");
-            }
-        }
-
-        return true;
-     
+		return false;
+    
     }
-
 }
