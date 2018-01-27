@@ -3,16 +3,19 @@ package me.engineersbox.menuinv;
 import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import net.md_5.bungee.api.ChatColor;
 
 public class EventList implements Listener {
 	
@@ -93,7 +96,7 @@ public class EventList implements Listener {
         		slot = slot + 1;
         	} else {
         		main.setItem(slot, pane);
-        		slot = slot + 1;
+        		slot += 1;
         	}
         }
 		
@@ -432,7 +435,35 @@ public class EventList implements Listener {
         ocean.setItem(36, back);
         ocean.setItem(44, exit);
 	}
-	 
+	
+	@SuppressWarnings("deprecation")
+	@EventHandler
+	public void onPLayerUse(PlayerInteractEvent event) {
+		
+		ItemStack tool = new ItemStack(Material.STONE_AXE);
+		ItemMeta im = tool.getItemMeta();
+		im.setDisplayName(ChatColor.DARK_RED + "[" + ChatColor.DARK_GREEN + "Biome " + ChatColor.DARK_AQUA + "Tool" + ChatColor.DARK_RED + "]");
+		im.addEnchant(Enchantment.PROTECTION_PROJECTILE, 1, true);
+		ArrayList<String> Lore = new ArrayList<String>();
+		Lore.add(ChatColor.YELLOW + "Alters Block Specific Biomes");
+		im.setLore(Lore);
+		tool.setItemMeta(im);
+		
+		Player p = event.getPlayer();
+		 
+	    if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+	        if (p.getItemInHand().equals(tool)) {
+	            
+	        	if (Main.biome == "desert" ) {
+	        		//Add code for changing block biome
+	        	}
+	        	
+	        }
+	    }
+
+	}
+	
+	
     @EventHandler
     public void onPlayerClickGUI(InventoryClickEvent e) {
         Player p = (Player) e.getWhoClicked();
