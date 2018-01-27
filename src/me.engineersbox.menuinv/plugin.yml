@@ -16,6 +16,9 @@ commands:
     bp tool biome:
         description: Gives Block Biome Tool
         usage: /bp tool biome <biome>
+    bp biomelist:
+        description: Gives Block Biome Tool
+        usage: /bp biomelist
     bp version:
         description: Displays Plugin Version Information
         usage: /bp version
