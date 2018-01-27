@@ -111,7 +111,7 @@ public class Commands implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-
+    	
     	Player p = (Player) sender;
     	
         if (sender instanceof Player) {
@@ -132,7 +132,7 @@ public class Commands implements CommandExecutor {
 	                	p.sendMessage("");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Opens The Block Palette Interface");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp tool " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Gives The Block Biome Altering Tool");
-	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/version BlockPalette " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays The Plugin Version And Author");
+	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp version " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays The Plugin Version And Author");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp help " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Opens This Menu");
 	                	p.sendMessage("");
 	                	p.sendMessage(ChatColor.DARK_GRAY + "----=<{" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Help" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
@@ -151,6 +151,45 @@ public class Commands implements CommandExecutor {
             			
             			p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Giving Block Biome Tool!");
             			p.getInventory().addItem(tool);
+            			
+            		} else if ((args[0].equalsIgnoreCase("tool")) && (args[1].equalsIgnoreCase("biome"))) {
+            			
+            			if (args[2].equalsIgnoreCase("desert")) {
+            				
+            				Main.biome = "biome";
+            				
+            			} else if (args[2].equalsIgnoreCase("forest")) {
+            				
+            				Main.biome = "forest";
+            				
+            			} else if (args[2].equalsIgnoreCase("ocean")) {
+            				
+            				Main.biome = "ocean";
+            				
+            			} else if (args[2].equalsIgnoreCase("extremehills")) {
+            				
+            				Main.biome = "extremehills";
+            				
+            			} else if (args[2].equalsIgnoreCase("taiga")) {
+            				
+            				Main.biome = "taiga";
+            				
+            			} else if (args[2].equalsIgnoreCase("plains")) {
+            				
+            				Main.biome = "plains";
+            			
+            			}
+            			
+            		} else if (args[0].equalsIgnoreCase("version")) {
+        				
+        				p.sendMessage("");
+        		    	p.sendMessage(ChatColor.DARK_GRAY + "----={<" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Version Info" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
+        		    	p.sendMessage("");
+        		    	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "Version Number " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "1.1");
+        		    	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "Author " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "EngineersBox");
+        		    	p.sendMessage("");
+        		    	p.sendMessage(ChatColor.DARK_GRAY + "----=<{" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Help" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
+        		    	p.sendMessage("");
             			
             		} else {
             			p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Invalid command!");
