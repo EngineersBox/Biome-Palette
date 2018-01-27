@@ -16,6 +16,7 @@ public class Main extends JavaPlugin {
         getCommand("bp help").setExecutor(new Commands());
         getCommand("bp tool").setExecutor(new Commands());
         getCommand("bp tool biome").setExecutor(new Commands());
+        getCommand("bp biomelist").setExecutor(new Commands());
         getCommand("bp version").setExecutor(new Commands());
     }
  
