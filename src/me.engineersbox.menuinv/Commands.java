@@ -123,7 +123,7 @@ public class Commands implements CommandExecutor {
             		p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Opening Palette!");
                     p.openInventory(main);
                     
-            	} else if (args.length == 1) {
+            	} else if (args.length > 0) {
             		
             		if (args[0].equalsIgnoreCase("help")) {
             			
@@ -132,7 +132,7 @@ public class Commands implements CommandExecutor {
 	                	p.sendMessage("");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Opens The Block Palette Interface");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp tool " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Gives The Block Biome Altering Tool");
-	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp tool biome <biome>" + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Sets The Biome To Be Used with /bp tool");
+	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp setbiome <biome>" + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Sets The Biome To Be Used with /bp tool");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp biomelist " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays The Valid Biomes For /bp tool biome");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp version " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays The Plugin Version And Author");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp help " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Opens This Menu");
@@ -154,33 +154,55 @@ public class Commands implements CommandExecutor {
             			p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Giving Block Biome Tool!");
             			p.getInventory().addItem(tool);
             			
-            		} else if ((args[0].equalsIgnoreCase("tool")) && (args[1].equalsIgnoreCase("biome"))) {
-            			
-            			if (args[2].equalsIgnoreCase("desert")) {
+            		} else if (args[0].equalsIgnoreCase("setbiome")) {
+            			if (args.length == 2) {
             				
-            				Main.biome = "biome";
+            				if (args[1].equalsIgnoreCase("desert")) {
+                				
+                				Main.biome = "desert";
+                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Biome Set To Desert");
+                				
+                			} else if (args[1].equalsIgnoreCase("forest")) {
+                				
+                				Main.biome = "forest";
+                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Biome Set To Forest");
+                				
+                			} else if (args[1].equalsIgnoreCase("ocean")) {
+                				
+                				Main.biome = "ocean";
+                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Biome Set To Ocean");
+                				
+                			} else if (args[1].equalsIgnoreCase("extremehills")) {
+                				
+                				Main.biome = "extremehills";
+                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Biome Set To Extreme Hills");
+                				
+                			} else if (args[1].equalsIgnoreCase("taiga")) {
+                				
+                				Main.biome = "taiga";
+                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Biome Set To Taiga");
+                				
+                			} else if (args[1].equalsIgnoreCase("plains")) {
+                				
+                				Main.biome = "plains";
+                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Biome Set To Plains");
+                			
+                			} else {
+                				
+                				Main.biome = "";
+                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Invalid Syntax!");
+                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Usage: /bp setbiome <biome>");
+                				
+                			}
             				
-            			} else if (args[2].equalsIgnoreCase("forest")) {
+            			} else if (args.length == 1) {
             				
-            				Main.biome = "forest";
+            				Main.biome = "";
+            				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Invalid Syntax!");
+            				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + ChatColor.ITALIC + "Usage: /bp setbiome <biome>");
             				
-            			} else if (args[2].equalsIgnoreCase("ocean")) {
-            				
-            				Main.biome = "ocean";
-            				
-            			} else if (args[2].equalsIgnoreCase("extremehills")) {
-            				
-            				Main.biome = "extremehills";
-            				
-            			} else if (args[2].equalsIgnoreCase("taiga")) {
-            				
-            				Main.biome = "taiga";
-            				
-            			} else if (args[2].equalsIgnoreCase("plains")) {
-            				
-            				Main.biome = "plains";
-            			
             			}
+            			
             			
             		} else if (args[0].equalsIgnoreCase("version")) {
         				
@@ -209,10 +231,12 @@ public class Commands implements CommandExecutor {
         		    	p.sendMessage("");	
         		    
             		} else {
-            			p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Invalid command!");
+            			p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Invalid Command!");
             		}
             	}
 
+            	return true;
+            	
             }
             
             return true;
