@@ -162,6 +162,12 @@ public class Commands implements CommandExecutor {
             					Main.biome = args[1];
             					p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Biome Set To: " + ChatColor.DARK_GREEN + args[1].substring(0, 1).toUpperCase() + args[1].substring(1).toLowerCase());
             					
+            				} else {
+            					
+            					Main.biome = "";
+                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Invalid Syntax!");
+                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + ChatColor.ITALIC + "Usage: /bp setbiome <biome>");
+            					
             				}
             				
             				/*if (args[1].equalsIgnoreCase("desert")) {
