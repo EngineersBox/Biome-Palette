@@ -12,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -450,27 +451,31 @@ public class EventList implements Listener {
 		tool.setItemMeta(im);
 		
 		Player p = event.getPlayer();
-		 
-	    if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-	        if (p.getItemInHand().equals(tool)) {
-	            
-	        	if (Main.biome != "" ) {
-	        		
-	        		p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Block Biome Set To: " + ChatColor.DARK_GREEN +  Main.biome.substring(0, 1).toUpperCase() + Main.biome.substring(1).toLowerCase());
-	        		
-	        		if (Main.biome == "desert") {
-	        			//Add code for changing block biome
-	        		}
-	        		
-	        	} else {
-	        		
-	        		p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Biome Not Set. Use /bp setbiome <biome>");
-	        		
-	        	}
-	        	
-	        }
-	    }
-
+		EquipmentSlot hand = event.getHand();
+		
+		if (hand.equals(EquipmentSlot.HAND)) {
+			
+			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+		        if (p.getItemInHand().equals(tool)) {
+		            
+		        	if (Main.biome != "" ) {
+		        		
+		        		p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Block Biome Set To: " + ChatColor.DARK_GREEN +  Main.biome.substring(0, 1).toUpperCase() + Main.biome.substring(1).toLowerCase());
+		        		
+		        		if (Main.biome == "desert") {
+		        			//Add code for changing block biome
+		        		}
+		        		
+		        	} else {
+		        		
+		        		p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Biome Not Set. Use: " + ChatColor.ITALIC + "/bp setbiome <biome>");
+		        		
+		        	}
+		        	
+		        }
+		    }
+			
+		}
 	}
 	
 	
