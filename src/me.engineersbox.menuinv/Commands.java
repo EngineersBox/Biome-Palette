@@ -157,7 +157,14 @@ public class Commands implements CommandExecutor {
             		} else if (args[0].equalsIgnoreCase("setbiome")) {
             			if (args.length == 2) {
             				
-            				if (args[1].equalsIgnoreCase("desert")) {
+            				if ((args[1].equalsIgnoreCase("desert")) || (args[1].equalsIgnoreCase("forest")) || (args[1].equalsIgnoreCase("ocean")) || (args[1].equalsIgnoreCase("extremehills")) || (args[1].equalsIgnoreCase("taiga")) || (args[1].equalsIgnoreCase("plains"))) {
+            					
+            					Main.biome = args[1];
+            					p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Biome Set To: " + ChatColor.DARK_GREEN + args[1].substring(0, 1).toUpperCase() + args[1].substring(1).toLowerCase());
+            					
+            				}
+            				
+            				/*if (args[1].equalsIgnoreCase("desert")) {
                 				
                 				Main.biome = "desert";
                 				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Biome Set To Desert");
@@ -193,7 +200,7 @@ public class Commands implements CommandExecutor {
                 				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Invalid Syntax!");
                 				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Usage: /bp setbiome <biome>");
                 				
-                			}
+                			}*/ //debug if complex if statement doesnt work
             				
             			} else if (args.length == 1) {
             				
