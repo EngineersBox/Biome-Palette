@@ -1,9 +1,0 @@
-name: MenuInv
-main: me.engineersbox.menuinv.Main
-version: 1.0 (alpha)
-author: EngineersBox
-description: Block Biome Palettes
-commands:
-    blockpalette:
-        description: Gives You The Biome-Specific Block Palette
-        usage: /blockpalette
