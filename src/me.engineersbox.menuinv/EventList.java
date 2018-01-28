@@ -454,8 +454,18 @@ public class EventList implements Listener {
 	    if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 	        if (p.getItemInHand().equals(tool)) {
 	            
-	        	if (Main.biome == "desert" ) {
-	        		//Add code for changing block biome
+	        	if (Main.biome != "" ) {
+	        		
+	        		p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Block Biome Set To: " + ChatColor.DARK_GREEN +  Main.biome);
+	        		
+	        		if (Main.biome == "desert") {
+	        			//Add code for changing block biome
+	        		}
+	        		
+	        	} else {
+	        		
+	        		p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Biome Not Set. Use /bp setbiome <biome>");
+	        		
 	        	}
 	        	
 	        }
