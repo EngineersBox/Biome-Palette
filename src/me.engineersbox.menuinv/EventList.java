@@ -456,7 +456,7 @@ public class EventList implements Listener {
 	            
 	        	if (Main.biome != "" ) {
 	        		
-	        		p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Block Biome Set To: " + ChatColor.DARK_GREEN +  Main.biome);
+	        		p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Block Biome Set To: " + ChatColor.DARK_GREEN +  Main.biome.substring(0, 1).toUpperCase() + Main.biome.substring(1).toLowerCase());
 	        		
 	        		if (Main.biome == "desert") {
 	        			//Add code for changing block biome
