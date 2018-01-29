@@ -14,6 +14,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -437,7 +438,6 @@ public class EventList implements Listener {
         ocean.setItem(44, exit);
 	}
 	
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPLayerUse(PlayerInteractEvent event) {
 		
@@ -445,6 +445,7 @@ public class EventList implements Listener {
 		ItemMeta im = tool.getItemMeta();
 		im.setDisplayName(ChatColor.DARK_RED + "[" + ChatColor.DARK_GREEN + "Biome " + ChatColor.DARK_AQUA + "Tool" + ChatColor.DARK_RED + "]");
 		im.addEnchant(Enchantment.PROTECTION_PROJECTILE, 1, true);
+		im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		ArrayList<String> Lore = new ArrayList<String>();
 		Lore.add(ChatColor.YELLOW + "Alters Block Specific Biomes");
 		im.setLore(Lore);
@@ -456,7 +457,7 @@ public class EventList implements Listener {
 		if (hand.equals(EquipmentSlot.HAND)) {
 			
 			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-		        if (p.getItemInHand().equals(tool)) {
+		        if (p.getInventory().getItemInMainHand().equals(tool)) {
 		            
 		        	if (Main.biome != "" ) {
 		        		
