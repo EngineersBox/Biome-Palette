@@ -8,11 +8,14 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.plugin.Plugin;
 
 public class Commands implements CommandExecutor {
 	
@@ -135,6 +138,7 @@ public class Commands implements CommandExecutor {
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp setbiome <biome>" + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Sets The Biome To Be Used with /bp tool");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp biomelist " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays The Valid Biomes For /bp tool biome");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp version " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays The Plugin Version And Author");
+	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp reload " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Reloads The BlockPalette Plugin");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp help " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Opens This Menu");
 	                	p.sendMessage("");
 	                	p.sendMessage(ChatColor.DARK_GRAY + "----=<{" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Help" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
@@ -146,6 +150,7 @@ public class Commands implements CommandExecutor {
             			ItemMeta im = tool.getItemMeta();
             			im.setDisplayName(ChatColor.DARK_RED + "[" + ChatColor.DARK_GREEN + "Biome " + ChatColor.DARK_AQUA + "Tool" + ChatColor.DARK_RED + "]");
             			im.addEnchant(Enchantment.PROTECTION_PROJECTILE, 1, true);
+            			im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
             			ArrayList<String> Lore = new ArrayList<String>();
             			Lore.add(ChatColor.YELLOW + "Alters Block Specific Biomes");
             			im.setLore(Lore);
@@ -165,8 +170,8 @@ public class Commands implements CommandExecutor {
             				} else {
             					
             					Main.biome = "";
-                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Invalid Syntax!");
-                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + ChatColor.ITALIC + "Usage: /bp setbiome <biome>");
+                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Invalid Biome!");
+                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "View Valid Biomes With: "  + ChatColor.ITALIC + "/bp biomelist");
             					
             				}
             				
@@ -212,7 +217,7 @@ public class Commands implements CommandExecutor {
             				
             				Main.biome = "";
             				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Invalid Syntax!");
-            				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + ChatColor.ITALIC + "Usage: /bp setbiome <biome>");
+            				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Usage: " + ChatColor.ITALIC + "/bp setbiome <biome>");
             				
             			}
             			
@@ -228,6 +233,16 @@ public class Commands implements CommandExecutor {
         		    	p.sendMessage(ChatColor.DARK_GRAY + "----=<{" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Version Info" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
         		    	p.sendMessage("");
         		    
+            		} else if (args[0].equalsIgnoreCase("reload")) {
+            			
+            			Main.config = YamlConfiguration.loadConfiguration(Main.cfile);
+            			
+            			p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_GREEN + "Reloading BlockPalette...");
+            			Plugin plugin = p.getServer().getPluginManager().getPlugin("BlockPalette");
+            			p.getServer().getPluginManager().disablePlugin(plugin);
+            			p.getServer().getPluginManager().enablePlugin(plugin);
+            			p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_GREEN + "Reload Complete!");
+        		    	
             		} else if (args[0].equalsIgnoreCase("biomelist")) {
         				
         				p.sendMessage("");
