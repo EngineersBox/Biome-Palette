@@ -13,12 +13,15 @@ commands:
     bp tool:
         description: Gives Block Biome Tool
         usage: /bp tool
-    bp tool biome:
-        description: Gives Block Biome Tool
-        usage: /bp tool biome <biome>
+    bp setbiome:
+        description: Sets Biome Tool Biome
+        usage: /bp setbiome <biome>
     bp biomelist:
         description: Gives Block Biome Tool
         usage: /bp biomelist
     bp version:
         description: Displays Plugin Version Information
         usage: /bp version
+    bp reload:
+        description: Reloads The BlockPalette Plugin
+        usage: /bp reload
