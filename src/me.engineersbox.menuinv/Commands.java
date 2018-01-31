@@ -64,44 +64,6 @@ public class Commands implements CommandExecutor {
             					
             				}
             				
-            				/*if (args[1].equalsIgnoreCase("desert")) {
-                				
-                				Main.biome = "desert";
-                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Biome Set To Desert");
-                				
-                			} else if (args[1].equalsIgnoreCase("forest")) {
-                				
-                				Main.biome = "forest";
-                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Biome Set To Forest");
-                				
-                			} else if (args[1].equalsIgnoreCase("ocean")) {
-                				
-                				Main.biome = "ocean";
-                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Biome Set To Ocean");
-                				
-                			} else if (args[1].equalsIgnoreCase("extremehills")) {
-                				
-                				Main.biome = "extremehills";
-                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Biome Set To Extreme Hills");
-                				
-                			} else if (args[1].equalsIgnoreCase("taiga")) {
-                				
-                				Main.biome = "taiga";
-                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Biome Set To Taiga");
-                				
-                			} else if (args[1].equalsIgnoreCase("plains")) {
-                				
-                				Main.biome = "plains";
-                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Biome Set To Plains");
-                			
-                			} else {
-                				
-                				Main.biome = "";
-                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Invalid Syntax!");
-                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Usage: /bp setbiome <biome>");
-                				
-                			}*/ //debug if complex if statement doesnt work
-            				
             			} else if (args.length == 1) {
             				
             				Main.biome = "";
