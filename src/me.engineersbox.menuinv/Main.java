@@ -3,6 +3,7 @@ package me.engineersbox.menuinv;
 import java.io.File;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -11,7 +12,9 @@ public class Main extends JavaPlugin {
 	static FileConfiguration config;
 	static File cfile;
 	
+	//Global Strings
 	public static String biome = "";
+	public static String prefix = ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] ";
 	
     @Override
     public void onEnable() {
