@@ -1,19 +1,12 @@
 package me.engineersbox.menuinv;
 
-import java.util.ArrayList;
-
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
 public class Commands implements CommandExecutor {
@@ -52,18 +45,8 @@ public class Commands implements CommandExecutor {
                 	
             		} else if (args[0].equalsIgnoreCase("tool")) {
             			
-            			ItemStack tool = new ItemStack(Material.STONE_AXE);
-            			ItemMeta im = tool.getItemMeta();
-            			im.setDisplayName(ChatColor.DARK_RED + "[" + ChatColor.DARK_GREEN + "Biome " + ChatColor.DARK_AQUA + "Tool" + ChatColor.DARK_RED + "]");
-            			im.addEnchant(Enchantment.PROTECTION_PROJECTILE, 1, true);
-            			im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-            			ArrayList<String> Lore = new ArrayList<String>();
-            			Lore.add(ChatColor.YELLOW + "Alters Block Specific Biomes");
-            			im.setLore(Lore);
-            			tool.setItemMeta(im);
-            			
             			p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Giving Block Biome Tool!");
-            			p.getInventory().addItem(tool);
+            			p.getInventory().addItem(Item.tool);
             			
             		} else if (args[0].equalsIgnoreCase("setbiome")) {
             			if (args.length == 2) {
