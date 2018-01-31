@@ -92,11 +92,16 @@ public class Commands implements CommandExecutor {
         int slot = 0;
         
         while(slot < 27) {
+        	
         	if((slot > 9) && (slot < 17) || (slot == 22)) {
-        		slot = slot + 1;
+        		
+        		slot += 1;
+        		
         	} else {
+        		
         		main.setItem(slot, pane);
         		slot += 1;
+        		
         	}
         }
 
@@ -123,7 +128,7 @@ public class Commands implements CommandExecutor {
             	
             	if (args.length == 0) {
             		
-            		p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Opening Palette!");
+            		p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Opening Palette!");
                     p.openInventory(main);
                     
             	} else if (args.length > 0) {
@@ -156,7 +161,7 @@ public class Commands implements CommandExecutor {
             			im.setLore(Lore);
             			tool.setItemMeta(im);
             			
-            			p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Giving Block Biome Tool!");
+            			p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Giving Block Biome Tool!");
             			p.getInventory().addItem(tool);
             			
             		} else if (args[0].equalsIgnoreCase("setbiome")) {
@@ -165,13 +170,13 @@ public class Commands implements CommandExecutor {
             				if ((args[1].equalsIgnoreCase("desert")) || (args[1].equalsIgnoreCase("forest")) || (args[1].equalsIgnoreCase("ocean")) || (args[1].equalsIgnoreCase("extremehills")) || (args[1].equalsIgnoreCase("taiga")) || (args[1].equalsIgnoreCase("plains"))) {
             					
             					Main.biome = args[1];
-            					p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Biome Set To: " + ChatColor.DARK_GREEN + args[1].substring(0, 1).toUpperCase() + args[1].substring(1).toLowerCase());
+            					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Biome Set To: " + ChatColor.DARK_GREEN + args[1].substring(0, 1).toUpperCase() + args[1].substring(1).toLowerCase());
             					
             				} else {
             					
             					Main.biome = "";
-                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Invalid Biome!");
-                				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "View Valid Biomes With: "  + ChatColor.ITALIC + "/bp biomelist");
+                				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Biome!");
+                				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "View Valid Biomes With: "  + ChatColor.ITALIC + "/bp biomelist");
             					
             				}
             				
@@ -216,8 +221,8 @@ public class Commands implements CommandExecutor {
             			} else if (args.length == 1) {
             				
             				Main.biome = "";
-            				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Invalid Syntax!");
-            				p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Usage: " + ChatColor.ITALIC + "/bp setbiome <biome>");
+            				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Syntax!");
+            				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Usage: " + ChatColor.ITALIC + "/bp setbiome <biome>");
             				
             			}
             			
@@ -239,11 +244,11 @@ public class Commands implements CommandExecutor {
             			
             			Main.config = YamlConfiguration.loadConfiguration(Main.cfile);
             			
-            			p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_GREEN + "Reloading BlockPalette...");
+            			p.sendMessage(Main.prefix + ChatColor.DARK_GREEN + "Reloading BlockPalette...");
             			Plugin plugin = p.getServer().getPluginManager().getPlugin("BlockPalette");
             			p.getServer().getPluginManager().disablePlugin(plugin);
             			p.getServer().getPluginManager().enablePlugin(plugin);
-            			p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_GREEN + "Reload Complete!");
+            			p.sendMessage(Main.prefix + ChatColor.DARK_GREEN + "Reload Complete!");
         		    	
             		} else if (args[0].equalsIgnoreCase("biomelist")) {
         				
@@ -261,7 +266,7 @@ public class Commands implements CommandExecutor {
         		    	p.sendMessage("");	
         		    
             		} else {
-            			p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Invalid Command!");
+            			p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Command!");
             		}
             	}
 
