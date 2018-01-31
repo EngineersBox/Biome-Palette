@@ -21,7 +21,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class EventList implements Listener {
 	
-	public final static Inventory main = Bukkit.createInventory(null, 9 * 3, ChatColor.DARK_RED + "           [" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] ");
+	public final static Inventory main = Bukkit.createInventory(null, 9 * 3, ChatColor.DARK_RED + "           " + Main.prefix);
 	
 	static {
 		
@@ -94,11 +94,16 @@ public class EventList implements Listener {
         int slot = 0;
         
         while(slot < 27) {
+        	
         	if((slot > 9) && (slot < 17) || (slot == 22)) {
-        		slot = slot + 1;
+        		
+        		slot += 1;
+        		
         	} else {
+        		
         		main.setItem(slot, pane);
         		slot += 1;
+        		
         	}
         }
 		
@@ -114,7 +119,7 @@ public class EventList implements Listener {
         
 	}
 
-	public final static Inventory desert = Bukkit.createInventory(null, 9 * 5, ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.GOLD + "Desert");
+	public final static Inventory desert = Bukkit.createInventory(null, 9 * 5, Main.prefix + ChatColor.GOLD + "Desert");
 
 	static {
 		
@@ -164,7 +169,7 @@ public class EventList implements Listener {
         desert.setItem(44, exit);
 	}
 	
-	public final static Inventory plains = Bukkit.createInventory(null, 9 * 5, ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_GREEN + "Plains");
+	public final static Inventory plains = Bukkit.createInventory(null, 9 * 5, Main.prefix + ChatColor.DARK_GREEN + "Plains");
 
 	static {
 		
@@ -201,7 +206,7 @@ public class EventList implements Listener {
         plains.setItem(44, exit);
 	}
 	
-	public final static Inventory forest = Bukkit.createInventory(null, 9 * 5, ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.GREEN + "Forest");
+	public final static Inventory forest = Bukkit.createInventory(null, 9 * 5, Main.prefix + ChatColor.GREEN + "Forest");
 
 	static {
 		
@@ -238,7 +243,7 @@ public class EventList implements Listener {
         forest.setItem(44, exit);
 	}
 	
-	public final static Inventory extremehills = Bukkit.createInventory(null, 9 * 5, ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_GRAY + "Extreme Hills");
+	public final static Inventory extremehills = Bukkit.createInventory(null, 9 * 5, Main.prefix + ChatColor.DARK_GRAY + "Extreme Hills");
 
 	static {
 		
@@ -288,7 +293,7 @@ public class EventList implements Listener {
         extremehills.setItem(44, exit);
 	}
 	
-	public final static Inventory savanna = Bukkit.createInventory(null, 9 * 5, ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_RED + "Savanna");
+	public final static Inventory savanna = Bukkit.createInventory(null, 9 * 5, Main.prefix + ChatColor.DARK_RED + "Savanna");
 
 	static {
 		
@@ -338,7 +343,7 @@ public class EventList implements Listener {
         savanna.setItem(44, exit);
 	}
 	
-	public final static Inventory taiga = Bukkit.createInventory(null, 9 * 5, ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.WHITE + "Taiga");
+	public final static Inventory taiga = Bukkit.createInventory(null, 9 * 5, Main.prefix + ChatColor.WHITE + "Taiga");
 
 	static {
 		
@@ -388,7 +393,7 @@ public class EventList implements Listener {
         taiga.setItem(44, exit);
 	}
 	
-	public final static Inventory ocean = Bukkit.createInventory(null, 9 * 5, ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_BLUE + "Ocean");
+	public final static Inventory ocean = Bukkit.createInventory(null, 9 * 5, Main.prefix + ChatColor.DARK_BLUE + "Ocean");
 
 	static {
 		
@@ -461,7 +466,7 @@ public class EventList implements Listener {
 		            
 		        	if (Main.biome != "" ) {
 		        		
-		        		p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_AQUA + "Block Biome Set To: " + ChatColor.DARK_GREEN +  Main.biome.substring(0, 1).toUpperCase() + Main.biome.substring(1).toLowerCase());
+		        		p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Block Biome Set To: " + ChatColor.DARK_GREEN +  Main.biome.substring(0, 1).toUpperCase() + Main.biome.substring(1).toLowerCase());
 		        		
 		        		if (Main.biome == "desert") {
 		        			//Add code for changing block biome
@@ -469,7 +474,7 @@ public class EventList implements Listener {
 		        		
 		        	} else {
 		        		
-		        		p.sendMessage(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_PURPLE + "Biome Not Set. Use: " + ChatColor.ITALIC + "/bp setbiome <biome>");
+		        		p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Biome Not Set. Use: " + ChatColor.ITALIC + "/bp setbiome <biome>");
 		        		
 		        	}
 		        	
@@ -486,7 +491,7 @@ public class EventList implements Listener {
         //ItemStack item = e.getCurrentItem();
         int slot = e.getRawSlot();
         
-        if (e.getInventory().getTitle().equals(ChatColor.DARK_RED + "           [" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] ")) { //main inventory
+        if (e.getInventory().getTitle().equals(ChatColor.DARK_RED + "           " + Main.prefix)) { //main inventory
             if (e.getSlot() == -999) {
                 return;
             }
@@ -530,7 +535,7 @@ public class EventList implements Listener {
         }
         
         
-        if (e.getInventory().getTitle().equals(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.GOLD + "Desert")) { //desert inventory
+        if (e.getInventory().getTitle().equals(Main.prefix + ChatColor.GOLD + "Desert")) { //desert inventory
             if (e.getSlot() == -999) {
                 return;
             }
@@ -551,7 +556,7 @@ public class EventList implements Listener {
         }
         
         
-        if (e.getInventory().getTitle().equals(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_GREEN + "Plains")) { //plains inventory
+        if (e.getInventory().getTitle().equals(Main.prefix + ChatColor.DARK_GREEN + "Plains")) { //plains inventory
             if (e.getSlot() == -999) {
                 return;
             }
@@ -571,28 +576,7 @@ public class EventList implements Listener {
         
         }
         
-        if (e.getInventory().getTitle().equals(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.GREEN + "Forest")) { //forest inventory
-            if (e.getSlot() == -999) {
-                return;
-            }
-
-            if (slot >= 0 && slot < 9 * 5) {
-                e.setCancelled(true);
-                //p.sendMessage("Event Cancelled!"); //debug
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.OBSIDIAN) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
-            	p.closeInventory();
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.BOOK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "BACK TO MAIN"))) {
-            	p.openInventory(main);
-            }
-        
-        }
-        
-        
-        if (e.getInventory().getTitle().equals(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_GRAY + "Extreme Hills")) { //extreme hills inventory
+        if (e.getInventory().getTitle().equals(Main.prefix + ChatColor.GREEN + "Forest")) { //forest inventory
             if (e.getSlot() == -999) {
                 return;
             }
@@ -613,7 +597,7 @@ public class EventList implements Listener {
         }
         
         
-        if (e.getInventory().getTitle().equals(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_RED + "Savanna")) { //savanna inventory
+        if (e.getInventory().getTitle().equals(Main.prefix + ChatColor.DARK_GRAY + "Extreme Hills")) { //extreme hills inventory
             if (e.getSlot() == -999) {
                 return;
             }
@@ -634,7 +618,7 @@ public class EventList implements Listener {
         }
         
         
-        if (e.getInventory().getTitle().equals(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.WHITE + "Taiga")) { //taiga inventory
+        if (e.getInventory().getTitle().equals(Main.prefix + ChatColor.DARK_RED + "Savanna")) { //savanna inventory
             if (e.getSlot() == -999) {
                 return;
             }
@@ -655,7 +639,28 @@ public class EventList implements Listener {
         }
         
         
-        if (e.getInventory().getTitle().equals(ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] " + ChatColor.DARK_BLUE + "Ocean")) { //ocean inventory
+        if (e.getInventory().getTitle().equals(Main.prefix + ChatColor.WHITE + "Taiga")) { //taiga inventory
+            if (e.getSlot() == -999) {
+                return;
+            }
+
+            if (slot >= 0 && slot < 9 * 5) {
+                e.setCancelled(true);
+                //p.sendMessage("Event Cancelled!"); //debug
+            }
+            
+            if ((e.getCurrentItem().getType() == Material.OBSIDIAN) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
+            	p.closeInventory();
+            }
+            
+            if ((e.getCurrentItem().getType() == Material.BOOK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "BACK TO MAIN"))) {
+            	p.openInventory(main);
+            }
+        
+        }
+        
+        
+        if (e.getInventory().getTitle().equals(Main.prefix + ChatColor.DARK_BLUE + "Ocean")) { //ocean inventory
             if (e.getSlot() == -999) {
                 return;
             }
