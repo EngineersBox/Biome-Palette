@@ -1,6 +1,6 @@
 name: BlockPalette
 main: me.engineersbox.menuinv.Main
-version: 1.1
+version: 1.1 BETA
 author: EngineersBox
 description: Block Biome Palettes
 commands:
@@ -16,9 +16,15 @@ commands:
     bp setbiome:
         description: Sets Biome Tool Biome
         usage: /bp setbiome <biome>
+    bp getbiome:
+        description: Changes Tool To Identify The Biome Of A Selected Block
+        usage: /bp getbiome <enable/disable>
     bp biomelist:
         description: Gives Block Biome Tool
         usage: /bp biomelist
+    bp chunkinfo:
+        description: Displays Chunk Data When Using /bp tool
+        usage: /bp chunkinfo <enable/disable>
     bp version:
         description: Displays Plugin Version Information
         usage: /bp version
