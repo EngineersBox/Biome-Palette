@@ -15,6 +15,8 @@ public class Main extends JavaPlugin {
 	//Global Strings
 	public static String biome = "";
 	public static String prefix = ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] ";
+	public static Integer getB = 0;
+	public static Integer chunkinfo = 0;
 	
     @Override
     public void onEnable() {
@@ -30,7 +32,9 @@ public class Main extends JavaPlugin {
         getCommand("bp help").setExecutor(new Commands());
         getCommand("bp tool").setExecutor(new Commands());
         getCommand("bp setbiome").setExecutor(new Commands());
+        getCommand("bp getbiome").setExecutor(new Commands());
         getCommand("bp biomelist").setExecutor(new Commands());
+        getCommand("bp chunkinfo").setExecutor(new Commands());
         getCommand("bp version").setExecutor(new Commands());
         getCommand("bp reload").setExecutor(new Commands());
     }
