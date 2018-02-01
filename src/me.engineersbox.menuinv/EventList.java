@@ -24,20 +24,33 @@ public class EventList implements Listener {
 			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
 		        if (p.getInventory().getItemInMainHand().equals(Item.tool)) {
 		            
-		        	if (Main.biome != "" ) {
+		        	if (Main.getB == 1) {
 		        		
-		        		p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Block Biome Set To: " + ChatColor.DARK_GREEN +  Main.biome.substring(0, 1).toUpperCase() + Main.biome.substring(1).toLowerCase());
+		        		p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Block Biome: " + ChatColor.DARK_GREEN +  event.getClickedBlock().getBiome());
 		        		
-		        		if (Main.biome == "desert") {
-		        			//Add code for changing block biome
+		        		if (Main.chunkinfo == 1) {
+		        			
+		        			p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "At Chunk: " + ChatColor.DARK_GRAY + event.getClickedBlock().getChunk());
+		        			
 		        		}
 		        		
-		        	} else {
-		        		
-		        		p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Biome Not Set. Use: " + ChatColor.ITALIC + "/bp setbiome <biome>");
-		        		
-		        	}
+		        	} else if (Main.getB == 0) {
 		        	
+			        	if (Main.biome != "" ) {
+			        		
+			        		p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Block Biome Set To: " + ChatColor.DARK_GREEN +  Main.biome.substring(0, 1).toUpperCase() + Main.biome.substring(1).toLowerCase());
+			        		
+			        		if (Main.biome == "desert") {
+			        			//Add code for changing block biome
+			        		}
+			        	
+			        		
+			        	} else {
+			        		
+			        		p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Biome Not Set. Use: " + ChatColor.ITALIC + "/bp setbiome <biome>");
+			        		
+			        	}
+		        	}
 		        }
 		    }
 			
