@@ -36,6 +36,7 @@ public class Main extends JavaPlugin {
         getCommand("bp biomelist").setExecutor(new Commands());
         getCommand("bp chunkinfo").setExecutor(new Commands());
         getCommand("bp version").setExecutor(new Commands());
+        getCommand("bp settings").setExecutor(new Commands());
         getCommand("bp reload").setExecutor(new Commands());
     }
  
