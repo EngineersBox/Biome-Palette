@@ -14,6 +14,7 @@ import org.bukkit.inventory.EquipmentSlot;
 
 public class EventList implements Listener {
 	
+	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPLayerUse(PlayerInteractEvent event) {
 		
@@ -44,30 +45,37 @@ public class EventList implements Listener {
 			        		if (Main.biome.equals("desert")) {
 			        			
 			        			event.getClickedBlock().setBiome(Biome.DESERT);
+			        			event.getClickedBlock().getChunk().getWorld().refreshChunk(event.getClickedBlock().getChunk().getX(), event.getClickedBlock().getChunk().getZ());
 			        			
 			        		} else if (Main.biome.equals("plains")) {
 			        			
 			        			event.getClickedBlock().setBiome(Biome.PLAINS);
+			        			event.getClickedBlock().getChunk().getWorld().refreshChunk(event.getClickedBlock().getChunk().getX(), event.getClickedBlock().getChunk().getZ());
 			        			
 			        		} else if (Main.biome.equals("extremehills")) {
 			        			
 			        			event.getClickedBlock().setBiome(Biome.EXTREME_HILLS);
+			        			event.getClickedBlock().getChunk().getWorld().refreshChunk(event.getClickedBlock().getChunk().getX(), event.getClickedBlock().getChunk().getZ());
 			        			
 			        		} else if (Main.biome.equals("forest")) {
 			        			
 			        			event.getClickedBlock().setBiome(Biome.FOREST);
+			        			event.getClickedBlock().getChunk().getWorld().refreshChunk(event.getClickedBlock().getChunk().getX(), event.getClickedBlock().getChunk().getZ());
 			        			
 			        		} else if (Main.biome.equals("ocean")) {
 			        			
 			        			event.getClickedBlock().setBiome(Biome.OCEAN);
+			        			event.getClickedBlock().getChunk().getWorld().refreshChunk(event.getClickedBlock().getChunk().getX(), event.getClickedBlock().getChunk().getZ());
 			        			
 			        		} else if (Main.biome.equals("savanna")) {
 			        			
 			        			event.getClickedBlock().setBiome(Biome.SAVANNA);
+			        			event.getClickedBlock().getChunk().getWorld().refreshChunk(event.getClickedBlock().getChunk().getX(), event.getClickedBlock().getChunk().getZ());
 			        			
 			        		} else if (Main.biome.equals("taiga")) {
 			        			
 			        			event.getClickedBlock().setBiome(Biome.TAIGA);
+			        			event.getClickedBlock().getChunk().getWorld().refreshChunk(event.getClickedBlock().getChunk().getX(), event.getClickedBlock().getChunk().getZ());
 			        			
 			        		} else {
 			        			
