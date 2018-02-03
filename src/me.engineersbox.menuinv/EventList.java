@@ -2,6 +2,7 @@ package me.engineersbox.menuinv;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -40,8 +41,38 @@ public class EventList implements Listener {
 			        		
 			        		p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Block Biome Set To: " + ChatColor.DARK_GREEN +  Main.biome.substring(0, 1).toUpperCase() + Main.biome.substring(1).toLowerCase());
 			        		
-			        		if (Main.biome == "desert") {
-			        			//Add code for changing block biome
+			        		if (Main.biome.equals("desert")) {
+			        			
+			        			event.getClickedBlock().setBiome(Biome.DESERT);
+			        			
+			        		} else if (Main.biome.equals("plains")) {
+			        			
+			        			event.getClickedBlock().setBiome(Biome.PLAINS);
+			        			
+			        		} else if (Main.biome.equals("extremehills")) {
+			        			
+			        			event.getClickedBlock().setBiome(Biome.EXTREME_HILLS);
+			        			
+			        		} else if (Main.biome.equals("forest")) {
+			        			
+			        			event.getClickedBlock().setBiome(Biome.FOREST);
+			        			
+			        		} else if (Main.biome.equals("ocean")) {
+			        			
+			        			event.getClickedBlock().setBiome(Biome.OCEAN);
+			        			
+			        		} else if (Main.biome.equals("savanna")) {
+			        			
+			        			event.getClickedBlock().setBiome(Biome.SAVANNA);
+			        			
+			        		} else if (Main.biome.equals("taiga")) {
+			        			
+			        			event.getClickedBlock().setBiome(Biome.TAIGA);
+			        			
+			        		} else {
+			        			
+			        			p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Biome!");
+			        			
 			        		}
 			        	
 			        		
