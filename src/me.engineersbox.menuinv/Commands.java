@@ -2,6 +2,7 @@ package me.engineersbox.menuinv;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -11,7 +12,7 @@ import org.bukkit.plugin.Plugin;
 
 public class Commands implements CommandExecutor {
 
-    @Override
+	@Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
     	
     	Player p = (Player) sender;
@@ -228,6 +229,24 @@ public class Commands implements CommandExecutor {
         		    	p.sendMessage(ChatColor.DARK_GRAY + "----=<{" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Biome List" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
         		    	p.sendMessage("");	
         		    
+            		} else if (args[0].equalsIgnoreCase("add")) {
+            			
+            			if (Material.matchMaterial(args[1].toUpperCase()) != null) {
+            				
+            				Main.mater = args[1].toUpperCase();
+            				
+            				if (args[2].equalsIgnoreCase("plains")) {
+            					
+            					Main.config.addDefault("plains", args[2]);
+            					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Added " + Main.mater + " [" + args[3] + "]" + " To " + Main.inv);
+                				p.getInventory().addItem(Item.test);
+            					
+            				} else {
+            					p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Biome!");
+            				}
+            			} else {
+            				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Block/Material!");
+            			}
             		} else {
             			p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Command!");
             		}
@@ -244,4 +263,5 @@ public class Commands implements CommandExecutor {
 		return false;
     
     }
+
 }
