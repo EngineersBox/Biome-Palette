@@ -17,8 +17,9 @@ public class Main extends JavaPlugin {
 	public static String prefix = ChatColor.DARK_RED + "[" + ChatColor.GOLD + "BlockPalette" + ChatColor.DARK_RED + "] ";
 	public static Integer getB = 0;
 	public static Integer chunkinfo = 0;
+	public static String mater = "";
+	public static String inv = null;
 	
-    @Override
     public void onEnable() {
     	
     	config = getConfig();
@@ -37,6 +38,7 @@ public class Main extends JavaPlugin {
         getCommand("bp chunkinfo").setExecutor(new Commands());
         getCommand("bp version").setExecutor(new Commands());
         getCommand("bp settings").setExecutor(new Commands());
+        getCommand("bp add").setExecutor(new Commands());
         getCommand("bp reload").setExecutor(new Commands());
     }
  
