@@ -5,9 +5,11 @@ import java.io.File;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
+import me.engineersbox.menuinv.InvConfig;
 
-public class Main extends JavaPlugin {
+public class Main extends JavaPlugin implements Listener {
 	
 	static FileConfiguration config;
 	static File cfile;
@@ -22,11 +24,13 @@ public class Main extends JavaPlugin {
 	
     public void onEnable() {
     	
-    	config = getConfig();
-    	config.options().copyDefaults(true);
-    	saveConfig();
-    	cfile = new File(getDataFolder(), "config.yml");
+    	if (!getDataFolder().exists()) {
+    		getDataFolder().mkdirs();
+    	}
     	
+    	new InvConfig(this);
+    	
+    	Bukkit.getServer().getPluginManager().registerEvents(this, this);
         Bukkit.getServer().getPluginManager().registerEvents(new EventList(), this);
         
         getCommand("bp").setExecutor(new Commands());
@@ -44,7 +48,7 @@ public class Main extends JavaPlugin {
  
     @Override
     public void onDisable() {
-     
+    	AbstractFile.save();
     }
     
 }
