@@ -9,6 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
+import me.engineersbox.menuinv.InvConfig;
 
 public class Commands implements CommandExecutor {
 
@@ -39,6 +40,7 @@ public class Commands implements CommandExecutor {
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp getbiome <enable/disable> " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Changes Tool To Identify The Biome Of A Selected Block");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp biomelist " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays The Valid Biomes For /bp tool biome");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp chunkinfo <enable/disable> " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays Chunk Data When Using /bp tool");
+	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp add <block> <biome> <name>" + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Adds A Block To The BlockPalette, Given Via Arguments");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp version " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays The Plugin Version And Author");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp reload " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Reloads The BlockPalette Plugin");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp help " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Opens This Menu");
@@ -231,6 +233,10 @@ public class Commands implements CommandExecutor {
         		    
             		} else if (args[0].equalsIgnoreCase("add")) {
             			
+            			String block = args[1].toLowerCase();
+            			String biome = args[2].toLowerCase();
+            			String name = args[3].toLowerCase();
+            			
             			if (Material.matchMaterial(args[1].toUpperCase()) != null) {
             				
             				Main.mater = args[1].toUpperCase();
@@ -239,7 +245,8 @@ public class Commands implements CommandExecutor {
             					
             					Main.config.addDefault("plains", args[2]);
             					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Added " + Main.mater + " [" + args[3] + "]" + " To " + Main.inv);
-                				p.getInventory().addItem(Item.test);
+                				InvConfig.newInv(block, block + "." + biome, block + "." + biome + "." + name);
+                				AbstractFile.save();
             					
             				} else {
             					p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Biome!");
