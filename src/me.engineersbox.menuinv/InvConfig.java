@@ -11,8 +11,8 @@ public class InvConfig extends AbstractFile{
 	}
 
 	public static void newInv(String block , String biome, String name) {
-		config.set(block, "");
 		config.set(biome, "");
+		config.set(block, "");
 		config.set(name, "");
 	}
 	
