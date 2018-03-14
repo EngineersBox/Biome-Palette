@@ -233,48 +233,48 @@ public class Commands implements CommandExecutor {
         		    
             		} else if (args[0].equalsIgnoreCase("add")) {
             			
-            			String block = args[1].toLowerCase();
-            			String biome = args[2].toLowerCase();
+            			String biome = args[1].toLowerCase();
+            			String block = args[2].toLowerCase();
             			String name = args[3].toLowerCase();
             			
-            			if (Material.matchMaterial(args[1].toUpperCase()) != null) {
+            			if (Material.matchMaterial(args[2].toUpperCase()) != null) {
             				
-            				Main.mater = args[1].toUpperCase();
+            				Main.mater = args[2].toUpperCase();
             				
-            				if (args[2].equalsIgnoreCase("plains")) {
+            				if (args[1].equalsIgnoreCase("plains")) {
             					
             					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Added " + Main.mater + " [" + args[3] + "]" + " To " + Main.inv);
-                				InvConfig.newInv(block, block + "." + biome, block + "." + biome + "." + name);
+            					InvConfig.newInv(biome, biome + "." + block, biome + "." + block + "." + name);
                 				AbstractFile.save();
             					
-            				} else if (args[2].equalsIgnoreCase("desert")) {
+            				} else if (args[1].equalsIgnoreCase("desert")) {
             					
             					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Added " + Main.mater + " [" + args[3] + "]" + " To " + Main.inv);
-                				InvConfig.newInv(block, block + "." + biome, block + "." + biome + "." + name);
-                				AbstractFile.save();
-                				
-            				} else if (args[2].equalsIgnoreCase("ocean")) {
-            					
-            					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Added " + Main.mater + " [" + args[3] + "]" + " To " + Main.inv);
-                				InvConfig.newInv(block, block + "." + biome, block + "." + biome + "." + name);
+            					InvConfig.newInv(biome, biome + "." + block, biome + "." + block + "." + name);
                 				AbstractFile.save();
                 				
-            				} else if (args[2].equalsIgnoreCase("forest")) {
+            				} else if (args[1].equalsIgnoreCase("ocean")) {
             					
             					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Added " + Main.mater + " [" + args[3] + "]" + " To " + Main.inv);
-                				InvConfig.newInv(block, block + "." + biome, block + "." + biome + "." + name);
+            					InvConfig.newInv(biome, biome + "." + block, biome + "." + block + "." + name);
                 				AbstractFile.save();
                 				
-            				} else if (args[2].equalsIgnoreCase("savanna")) {
+            				} else if (args[1].equalsIgnoreCase("forest")) {
             					
             					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Added " + Main.mater + " [" + args[3] + "]" + " To " + Main.inv);
-                				InvConfig.newInv(block, block + "." + biome, block + "." + biome + "." + name);
+            					InvConfig.newInv(biome, biome + "." + block, biome + "." + block + "." + name);
                 				AbstractFile.save();
                 				
-            				} else if (args[2].equalsIgnoreCase("taiga")) {
+            				} else if (args[1].equalsIgnoreCase("savanna")) {
             					
             					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Added " + Main.mater + " [" + args[3] + "]" + " To " + Main.inv);
-                				InvConfig.newInv(block, block + "." + biome, block + "." + biome + "." + name);
+                				InvConfig.newInv(biome, biome + "." + block, biome + "." + block + "." + name);
+                				AbstractFile.save();
+                				
+            				} else if (args[1].equalsIgnoreCase("taiga")) {
+            					
+            					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Added " + Main.mater + " [" + args[3] + "]" + " To " + Main.inv);
+            					InvConfig.newInv(biome, biome + "." + block, biome + "." + block + "." + name);
                 				AbstractFile.save();
                 				
             				} else {
