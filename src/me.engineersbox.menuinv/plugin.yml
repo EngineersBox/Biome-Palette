@@ -28,6 +28,9 @@ commands:
     bp settings:
         description: View The Active Settings For /bp getbiome and /bpchunkinfo
         usage: /bp settings
+    bp add:
+        description: Adds A Block To The BlockPalette, Given Via Arguments
+        usage: /bp add <biome> <block> <name>
     bp version:
         description: Displays Plugin Version Information
         usage: /bp version
