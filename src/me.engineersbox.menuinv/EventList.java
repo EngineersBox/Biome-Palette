@@ -11,6 +11,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
+import me.engineersbox.menuinv.LoadInv;
+
 
 public class EventList implements Listener {
 	
@@ -118,30 +120,37 @@ public class EventList implements Listener {
             }
             
             if ((e.getCurrentItem().getType() == Material.SAND) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "DESERT"))) {
+            	LoadInv.getItemList("desert");
             	p.openInventory(Inventories.desert);
             }
             
             if ((e.getCurrentItem().getType() == Material.GRASS) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_GREEN + "PLAINS"))) {
+            	LoadInv.getItemList("plains");
             	p.openInventory(Inventories.plains);
             }
             
             if ((e.getCurrentItem().getType() == Material.LEAVES) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GREEN + "FOREST"))) {
+            	LoadInv.getItemList("forest");
             	p.openInventory(Inventories.forest);
             }
             
             if ((e.getCurrentItem().getType() == Material.STONE) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_GRAY + "EXTREME HILLS"))) {
+            	LoadInv.getItemList("extremehills");
             	p.openInventory(Inventories.extremehills);
             }
             
             if ((e.getCurrentItem().getType() == Material.LOG_2) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "SAVANNA"))) {
+            	LoadInv.getItemList("savanna");
             	p.openInventory(Inventories.savanna);
             }
             
             if ((e.getCurrentItem().getType() == Material.SNOW_BLOCK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.WHITE + "TAIGA"))) {
+            	LoadInv.getItemList("taiga");
             	p.openInventory(Inventories.taiga);
             }
             
             if ((e.getCurrentItem().getType() == Material.PRISMARINE) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_BLUE + "OCEAN"))) {
+            	LoadInv.getItemList("ocean");
             	p.openInventory(Inventories.ocean);
             }
         }
