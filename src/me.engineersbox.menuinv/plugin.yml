@@ -1,39 +1,98 @@
 name: BlockPalette
 main: me.engineersbox.menuinv.Main
-version: 1.1 BETA
+version: 1.7 BETA
 author: EngineersBox
 description: Block Biome Palettes
 commands:
     bp:
         description: Opens The Block Palette For Biome Specific Textures
         usage: /bp
+        permission: bp.open
     bp help:
         description: Displays All Help Options For BlockPalette
         usage: /bp help
+        permission: bp.help
     bp tool:
         description: Gives Block Biome Tool
         usage: /bp tool
+        permission: bp.tool
     bp setbiome:
         description: Sets Biome Tool Biome
         usage: /bp setbiome <biome>
+        permission: bp.setbiome
     bp getbiome:
         description: Changes Tool To Identify The Biome Of A Selected Block
         usage: /bp getbiome <enable/disable>
+        permission: bp.getbiome
     bp biomelist:
         description: Gives Block Biome Tool
         usage: /bp biomelist
+        permission: bp.biomelist
     bp chunkinfo:
         description: Displays Chunk Data When Using /bp tool
         usage: /bp chunkinfo <enable/disable>
+        permission: bp.chunkinfo
     bp settings:
         description: View The Active Settings For /bp getbiome and /bpchunkinfo
         usage: /bp settings
+        permission: bp.settings
     bp add:
         description: Adds A Block To The BlockPalette, Given Via Arguments
         usage: /bp add <biome> <block> <name>
+        permission: bp.add
     bp version:
         description: Displays Plugin Version Information
         usage: /bp version
+        permission: bp.version
     bp reload:
         description: Reloads The BlockPalette Plugin
         usage: /bp reload
+        permission: bp.reload
+permissions:
+    bp.*:
+        description: Gives Access To All BlockPalette Commands
+        children:
+            bp.open: true
+            bp.help: true
+            bp.tool: true
+            bp.setbiome: true
+            bp.getbiome: true
+            bp.biomelist: true
+            bp.chunkinfo: true
+            bp.settings: true
+            bp.add: true
+            bp.version: true
+            bp.reload: true
+    bp.open:
+        description: Gives Access To BlockPallete Inventory
+        default: true
+    bp.help:
+        description: Gives Access To BlockPalette Help Section
+        default: true
+    bp.tool:
+        decription: Gives Access To BlockPallete Biome Tool
+        default: op
+    bp.setbiome:
+        description: Gives Access To Tool Biome
+        default: op
+    bp.getbiome:
+        description: Gives Access To View Tool Active Biome
+        default: op
+    bp.biomelist:
+        description: Gives Access To Valid Biomes
+        default: true
+    bp.chunkinfo:
+        description: Gives Access To View Active Chunk For Tool
+        default: op
+    bp.settings:
+        description: Gives Access To View getbiome And chunkinfo Settings
+        default: true
+    bp.add:
+        description: Gives Access To Add Custom Blocks To BlockPallete Inventory
+        default: op
+    bp.version:
+        description: Gives Access To View Current Plugin Version
+        default: true
+    bp.reload:
+        description: Gives Access To Reload BlockPallete Plugin
+        default: op
