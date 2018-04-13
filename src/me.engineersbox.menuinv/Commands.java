@@ -20,7 +20,7 @@ public class Commands implements CommandExecutor {
     	
         if (sender instanceof Player) {
         	
-            if (cmd.getName().equalsIgnoreCase("bp")) {
+            if ((cmd.getName().equalsIgnoreCase("bp")) && (p.hasPermission("bp.open"))) {
             	
             	if (args.length == 0) {
             		
@@ -29,7 +29,7 @@ public class Commands implements CommandExecutor {
                     
             	} else if (args.length > 0) {
             		
-            		if (args[0].equalsIgnoreCase("help")) {
+            		if ((args[0].equalsIgnoreCase("help")) && (p.hasPermission("bp.help"))) {
             			
 	            		p.sendMessage("");
 	                	p.sendMessage(ChatColor.DARK_GRAY + "----={<" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Help" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
@@ -40,7 +40,7 @@ public class Commands implements CommandExecutor {
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp getbiome <enable/disable> " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Changes Tool To Identify The Biome Of A Selected Block");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp biomelist " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays The Valid Biomes For /bp tool biome");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp chunkinfo <enable/disable> " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays Chunk Data When Using /bp tool");
-	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp add <block> <biome> <name>" + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Adds A Block To The BlockPalette, Given Via Arguments");
+	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp add <biome> <block> <name>" + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Adds A Block To The BlockPalette, Given Via Arguments");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp version " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays The Plugin Version And Author");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp reload " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Reloads The BlockPalette Plugin");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp help " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Opens This Menu");
@@ -48,12 +48,12 @@ public class Commands implements CommandExecutor {
 	                	p.sendMessage(ChatColor.DARK_GRAY + "----=<{" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Help" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
 	                	p.sendMessage("");
                 	
-            		} else if (args[0].equalsIgnoreCase("tool")) {
+            		} else if ((args[0].equalsIgnoreCase("tool")) && (p.hasPermission("bp.tool"))) {
             			
             			p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Giving Block Biome Tool!");
             			p.getInventory().addItem(Item.tool);
             			
-            		} else if (args[0].equalsIgnoreCase("setbiome")) {
+            		} else if ((args[0].equalsIgnoreCase("setbiome")) && (p.hasPermission("bp.setbiome"))) {
             			
             			if (args.length == 2) {
             				
@@ -79,7 +79,7 @@ public class Commands implements CommandExecutor {
             			}
             			
             		
-            		} else if (args[0].equalsIgnoreCase("getbiome")) {
+            		} else if ((args[0].equalsIgnoreCase("getbiome")) && (p.hasPermission("bp.getbiome"))) {
             			
             			if (args.length == 2) {
             				
@@ -119,7 +119,7 @@ public class Commands implements CommandExecutor {
             				
             			}
             			
-            		} else if (args[0].equalsIgnoreCase("chunkinfo")) {
+            		} else if ((args[0].equalsIgnoreCase("chunkinfo")) && (p.hasPermission("bp.chunkinfo"))) {
             			
             			if (args.length == 2) {
             				
@@ -159,7 +159,7 @@ public class Commands implements CommandExecutor {
             				
             			}
             		
-            		} else if (args[0].equalsIgnoreCase("settings")) {
+            		} else if ((args[0].equalsIgnoreCase("settings")) && (p.hasPermission("bp.settings"))) {
             			
             			String getbiome = "";
             			String chunkinfo = "";
@@ -193,7 +193,7 @@ public class Commands implements CommandExecutor {
         		    	p.sendMessage(ChatColor.DARK_GRAY + "----=<{" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Settings" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
         		    	p.sendMessage("");
             			
-            		} else if (args[0].equalsIgnoreCase("version")) {
+            		} else if ((args[0].equalsIgnoreCase("version")) && (p.hasPermission("bp.version"))) {
         				
             			String version = Bukkit.getServer().getPluginManager().getPlugin("BlockPalette").getDescription().getVersion();
             			
@@ -206,7 +206,7 @@ public class Commands implements CommandExecutor {
         		    	p.sendMessage(ChatColor.DARK_GRAY + "----=<{" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Version Info" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
         		    	p.sendMessage("");
         		    
-            		} else if (args[0].equalsIgnoreCase("reload")) {
+            		} else if ((args[0].equalsIgnoreCase("reload")) && (p.hasPermission("bp.reload"))) {
             			
             			Main.config = YamlConfiguration.loadConfiguration(Main.cfile);
             			
@@ -216,7 +216,7 @@ public class Commands implements CommandExecutor {
             			p.getServer().getPluginManager().enablePlugin(plugin);
             			p.sendMessage(Main.prefix + ChatColor.DARK_GREEN + "Reload Complete!");
         		    	
-            		} else if (args[0].equalsIgnoreCase("biomelist")) {
+            		} else if ((args[0].equalsIgnoreCase("biomelist")) && (p.hasPermission("bp.biomelist"))) {
         				
         				p.sendMessage("");
         		    	p.sendMessage(ChatColor.DARK_GRAY + "----={<" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Biome List" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
@@ -231,7 +231,7 @@ public class Commands implements CommandExecutor {
         		    	p.sendMessage(ChatColor.DARK_GRAY + "----=<{" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Biome List" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
         		    	p.sendMessage("");	
         		    
-            		} else if (args[0].equalsIgnoreCase("add")) {
+            		} else if ((args[0].equalsIgnoreCase("add")) && (p.hasPermission("bp.add"))) {
             			
             			if (args.length == 4) {
             				
@@ -299,8 +299,14 @@ public class Commands implements CommandExecutor {
             				
             			}
             			
+            		} else  if ((!p.hasPermission("help")) || (!p.hasPermission("tool")) || (!p.hasPermission("open")) || (!p.hasPermission("setbiome")) || (!p.hasPermission("getbiome")) || (!p.hasPermission("biomelist")) || (!p.hasPermission("chunkinfo")) || (!p.hasPermission("settings")) || (!p.hasPermission("add")) || (!p.hasPermission("version")) || (!p.hasPermission("reload"))) {	
+            		
+            			p.sendMessage(Main.prefix + ChatColor.RED + "You Do Not Have Permission!");
+            			
             		} else {
+            			
             			p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Command!");
+            			
             		}
             	}
 
