@@ -72,7 +72,7 @@ public class LoadInv extends AbstractFile {
 		        	
 		        	//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_BLUE + "debug forest");
 		        	
-		        }	else if ((biome == "savanna") && i < 39) {
+		        } else if ((biome == "savanna") && i < 39) {
 		        	
 		        	Inventories.savanna.setItem(i, item);
 		        	i += 1;
