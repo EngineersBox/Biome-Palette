@@ -130,26 +130,13 @@ public class Inventories {
 	
 	        ItemStack eye = new ItemStack(Material.EYE_OF_ENDER);
 	        ItemMeta im3 = eye.getItemMeta();
-	        im3.setDisplayName(ChatColor.DARK_RED + "");
+	        im3.setDisplayName(ChatColor.DARK_PURPLE + "Page");
 	        eye.setItemMeta(im3);
 	        
 	        ItemStack next = new ItemStack(Material.PAPER);
 	        ItemMeta im4 = next.getItemMeta();
 	        im4.setDisplayName(ChatColor.DARK_GREEN + "Next Page");
 	        next.setItemMeta(im4);
-	        
-	        
-	        ItemStack sand_layer = new ItemStack(Material.SNOW, 1);
-	        ItemMeta im5 = sand_layer.getItemMeta();
-	        im5.setDisplayName("Sand Layer");
-	        ArrayList<String> Lore = new ArrayList<String>();
-	        Lore.add("");
-	        Lore.add(ChatColor.YELLOW + "Base Block:");
-	        Lore.add(ChatColor.YELLOW + "snow_layer");
-	        im5.setLore(Lore);
-	        sand_layer.setItemMeta(im5);
-	        
-	        desert.setItem(0, sand_layer);
 	        
 	        desert.setItem(39, prev);
 	        desert.setItem(40, eye);
@@ -180,7 +167,7 @@ public class Inventories {
 	
 	        ItemStack eye = new ItemStack(Material.EYE_OF_ENDER);
 	        ItemMeta im3 = eye.getItemMeta();
-	        im3.setDisplayName(ChatColor.DARK_RED + "");
+	        im3.setDisplayName(ChatColor.DARK_PURPLE + "Page");
 	        eye.setItemMeta(im3);
 	        
 	        ItemStack next = new ItemStack(Material.PAPER);
@@ -217,7 +204,7 @@ public class Inventories {
 	
 	        ItemStack eye = new ItemStack(Material.EYE_OF_ENDER);
 	        ItemMeta im3 = eye.getItemMeta();
-	        im3.setDisplayName(ChatColor.DARK_RED + "");
+	        im3.setDisplayName(ChatColor.DARK_PURPLE + "Page");
 	        eye.setItemMeta(im3);
 	        
 	        ItemStack next = new ItemStack(Material.PAPER);
@@ -254,7 +241,7 @@ public class Inventories {
 	
 	        ItemStack eye = new ItemStack(Material.EYE_OF_ENDER);
 	        ItemMeta im3 = eye.getItemMeta();
-	        im3.setDisplayName(ChatColor.DARK_RED + "");
+	        im3.setDisplayName(ChatColor.DARK_PURPLE + "Page");
 	        eye.setItemMeta(im3);
 	        
 	        ItemStack next = new ItemStack(Material.PAPER);
@@ -304,7 +291,7 @@ public class Inventories {
 	
 	        ItemStack eye = new ItemStack(Material.EYE_OF_ENDER);
 	        ItemMeta im3 = eye.getItemMeta();
-	        im3.setDisplayName(ChatColor.DARK_RED + "");
+	        im3.setDisplayName(ChatColor.DARK_PURPLE + "Page");
 	        eye.setItemMeta(im3);
 	        
 	        ItemStack next = new ItemStack(Material.PAPER);
@@ -354,7 +341,7 @@ public class Inventories {
 	
 	        ItemStack eye = new ItemStack(Material.EYE_OF_ENDER);
 	        ItemMeta im3 = eye.getItemMeta();
-	        im3.setDisplayName(ChatColor.DARK_RED + "");
+	        im3.setDisplayName(ChatColor.DARK_PURPLE + "Page");
 	        eye.setItemMeta(im3);
 	        
 	        ItemStack next = new ItemStack(Material.PAPER);
@@ -404,7 +391,7 @@ public class Inventories {
 	
 	        ItemStack eye = new ItemStack(Material.EYE_OF_ENDER);
 	        ItemMeta im3 = eye.getItemMeta();
-	        im3.setDisplayName(ChatColor.DARK_RED + "");
+	        im3.setDisplayName(ChatColor.DARK_PURPLE + "Page");
 	        eye.setItemMeta(im3);
 	        
 	        ItemStack next = new ItemStack(Material.PAPER);
