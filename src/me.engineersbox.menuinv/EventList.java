@@ -120,6 +120,7 @@ public class EventList implements Listener {
             }
             
             if ((e.getCurrentItem().getType() == Material.SAND) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "DESERT"))) {
+            	Main.i = 0;
             	LoadInv.getItemList("desert");
             	p.openInventory(Inventories.desert);
             }
@@ -167,11 +168,29 @@ public class EventList implements Listener {
             }
             
             if ((e.getCurrentItem().getType() == Material.OBSIDIAN) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
+            	Main.cinv = 0;
+            	Main.i = 0;
             	p.closeInventory();
             }
             
             if ((e.getCurrentItem().getType() == Material.BOOK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "BACK TO MAIN"))) {
+            	Main.cinv = 0;
+            	Main.i = 0;
             	p.openInventory(Inventories.main);
+            }
+            
+            if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_GREEN + "Next Page")) && (Main.oinv == true)) {
+            	Main.cinv += 1;
+            	LoadInv.getItemList("desert");
+            	p.openInventory(Inventories.desert);
+            	//p.sendMessage("Completed " + Main.oinv);
+            }
+            
+            if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Previous Page")) && (Main.cinv > 0)) {
+            	Main.cinv -= 1;
+            	Main.i = 36 * Main.cinv;
+            	LoadInv.getItemList("desert");
+            	p.openInventory(Inventories.desert);
             }
         
         }
@@ -188,11 +207,29 @@ public class EventList implements Listener {
             }
             
             if ((e.getCurrentItem().getType() == Material.OBSIDIAN) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
+            	Main.cinv = 0;
+            	Main.i = 0;
             	p.closeInventory();
             }
             
             if ((e.getCurrentItem().getType() == Material.BOOK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "BACK TO MAIN"))) {
+            	Main.cinv = 0;
+            	Main.i = 0;
             	p.openInventory(Inventories.main);
+            }
+            
+            if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_GREEN + "Next Page")) && (Main.oinv == true)) {
+            	Main.cinv += 1;
+            	LoadInv.getItemList("plains");
+            	p.openInventory(Inventories.plains);
+            	//p.sendMessage("Completed " + Main.oinv);
+            }
+            
+            if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Previous Page")) && (Main.cinv > 0)) {
+            	Main.cinv -= 1;
+            	Main.i = 36 * Main.cinv;
+            	LoadInv.getItemList("plains");
+            	p.openInventory(Inventories.plains);
             }
         
         }
@@ -208,11 +245,29 @@ public class EventList implements Listener {
             }
             
             if ((e.getCurrentItem().getType() == Material.OBSIDIAN) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
+            	Main.cinv = 0;
+            	Main.i = 0;
             	p.closeInventory();
             }
             
             if ((e.getCurrentItem().getType() == Material.BOOK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "BACK TO MAIN"))) {
+            	Main.cinv = 0;
+            	Main.i = 0;
             	p.openInventory(Inventories.main);
+            }
+            
+            if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_GREEN + "Next Page")) && (Main.oinv == true)) {
+            	Main.cinv += 1;
+            	LoadInv.getItemList("forest");
+            	p.openInventory(Inventories.forest);
+            	//p.sendMessage("Completed " + Main.oinv);
+            }
+            
+            if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Previous Page")) && (Main.cinv > 0)) {
+            	Main.cinv -= 1;
+            	Main.i = 36 * Main.cinv;
+            	LoadInv.getItemList("forest");
+            	p.openInventory(Inventories.forest);
             }
         
         }
@@ -229,11 +284,29 @@ public class EventList implements Listener {
             }
             
             if ((e.getCurrentItem().getType() == Material.OBSIDIAN) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
+            	Main.cinv = 0;
+            	Main.i = 0;
             	p.closeInventory();
             }
             
             if ((e.getCurrentItem().getType() == Material.BOOK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "BACK TO MAIN"))) {
+            	Main.cinv = 0;
+            	Main.i = 0;
             	p.openInventory(Inventories.main);
+            }
+            
+            if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_GREEN + "Next Page")) && (Main.oinv == true)) {
+            	Main.cinv += 1;
+            	LoadInv.getItemList("extremehills");
+            	p.openInventory(Inventories.extremehills);
+            	//p.sendMessage("Completed " + Main.oinv);
+            }
+            
+            if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Previous Page")) && (Main.cinv > 0)) {
+            	Main.cinv -= 1;
+            	Main.i = 36 * Main.cinv;
+            	LoadInv.getItemList("extremehills");
+            	p.openInventory(Inventories.extremehills);
             }
         
         }
@@ -250,11 +323,29 @@ public class EventList implements Listener {
             }
             
             if ((e.getCurrentItem().getType() == Material.OBSIDIAN) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
+            	Main.cinv = 0;
+            	Main.i = 0;
             	p.closeInventory();
             }
             
             if ((e.getCurrentItem().getType() == Material.BOOK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "BACK TO MAIN"))) {
+            	Main.cinv = 0;
+            	Main.i = 0;
             	p.openInventory(Inventories.main);
+            }
+            
+            if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_GREEN + "Next Page")) && (Main.oinv == true)) {
+            	Main.cinv += 1;
+            	LoadInv.getItemList("savanna");
+            	p.openInventory(Inventories.savanna);
+            	//p.sendMessage("Completed " + Main.oinv);
+            }
+            
+            if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Previous Page")) && (Main.cinv > 0)) {
+            	Main.cinv -= 1;
+            	Main.i = 36 * Main.cinv;
+            	LoadInv.getItemList("savanna");
+            	p.openInventory(Inventories.savanna);
             }
         
         }
@@ -271,11 +362,29 @@ public class EventList implements Listener {
             }
             
             if ((e.getCurrentItem().getType() == Material.OBSIDIAN) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
+            	Main.cinv = 0;
+            	Main.i = 0;
             	p.closeInventory();
             }
             
             if ((e.getCurrentItem().getType() == Material.BOOK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "BACK TO MAIN"))) {
+            	Main.cinv = 0;
+            	Main.i = 0;
             	p.openInventory(Inventories.main);
+            }
+            
+            if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_GREEN + "Next Page")) && (Main.oinv == true)) {
+            	Main.cinv += 1;
+            	LoadInv.getItemList("taiga");
+            	p.openInventory(Inventories.taiga);
+            	//p.sendMessage("Completed " + Main.oinv);
+            }
+            
+            if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Previous Page")) && (Main.cinv > 0)) {
+            	Main.cinv -= 1;
+            	Main.i = 36 * Main.cinv;
+            	LoadInv.getItemList("taiga");
+            	p.openInventory(Inventories.taiga);
             }
         
         }
@@ -292,15 +401,33 @@ public class EventList implements Listener {
             }
             
             if ((e.getCurrentItem().getType() == Material.OBSIDIAN) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
+            	Main.cinv = 0;
+            	Main.i = 0;
             	p.closeInventory();
             }
             
             if ((e.getCurrentItem().getType() == Material.BOOK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "BACK TO MAIN"))) {
+            	Main.cinv = 0;
+            	Main.i = 0;
             	p.openInventory(Inventories.main);
+            }
+            
+            if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_GREEN + "Next Page")) && (Main.oinv == true)) {
+            	Main.cinv += 1;
+            	LoadInv.getItemList("ocean");
+            	p.openInventory(Inventories.ocean);
+            	//p.sendMessage("Completed " + Main.oinv);
+            }
+            
+            if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Previous Page")) && (Main.cinv > 0)) {
+            	Main.cinv -= 1;
+            	Main.i = 36 * Main.cinv;
+            	LoadInv.getItemList("ocean");
+            	p.openInventory(Inventories.ocean);
             }
         
         }
- 
+        
     }
 
 }
