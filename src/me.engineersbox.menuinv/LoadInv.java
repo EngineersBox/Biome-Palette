@@ -21,16 +21,110 @@ public class LoadInv extends AbstractFile {
 
 	public static void getItemList(String biome) {
 		
+		int slot = 0;
+		int totali = Main.i * Main.cinv;
+		int k = 0;
+		
+		ItemStack pagecount = new ItemStack(Material.EYE_OF_ENDER, (short) Main.cinv + 1);
+		ItemMeta countid = pagecount.getItemMeta();
+		countid.setDisplayName(ChatColor.DARK_PURPLE + "Page");
+		pagecount.setItemMeta(countid);
+		
 		if (config.contains(biome)) {
+			
+			if (Main.oinv == true) {
+				
+				if (biome == "desert") {
+					
+					while (k < 36) {
+						
+						Inventories.desert.clear(k);
+						Inventories.desert.setItem(40, pagecount);
+						k += 1;
+						
+					}
+				
+				} else if (biome == "plains") {
+					
+					while (k < 36) {
+						
+						Inventories.plains.clear(k);
+						Inventories.plains.setItem(40, pagecount);
+						k += 1;
+						
+					}
+					
+				} else if (biome == "forest") {
+					
+					while (k < 36) {
+						
+						Inventories.forest.clear(k);
+						Inventories.forest.setItem(40, pagecount);
+						k += 1;
+						
+					}
+					
+				} else if (biome == "extremehills") {
+					
+					while (k < 36) {
+						
+						Inventories.extremehills.clear(k);
+						Inventories.extremehills.setItem(40, pagecount);
+						k += 1;
+						
+					}
+					
+				} else if (biome == "savanna") {
+					
+					while (k < 36) {
+						
+						Inventories.savanna.clear(k);
+						Inventories.savanna.setItem(40, pagecount);
+						k += 1;
+						
+					}
+					
+				} else if (biome == "taiga") {
+					
+					while (k < 36) {
+						
+						Inventories.taiga.clear(k);
+						Inventories.taiga.setItem(40, pagecount);
+						k += 1;
+						
+					}
+					
+				} else if (biome == "ocean") {
+					
+					while (k < 36) {
+						
+						Inventories.ocean.clear(k);
+						Inventories.ocean.setItem(40, pagecount);
+						k += 1;
+						
+					}
+					
+				} else {
+					
+					Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_AQUA + biome + ChatColor.DARK_RED + " Invalid Biome!");
+					
+				}
+			
+				slot = 0;
+				Main.oinv = false;
+		
+			}
 			
 			List<String> items = config.getStringList(biome);
 			
 			//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_AQUA + "List Exists!");
 			
-			int i = 0;
-			while (i < items.size()) {
+			while ((Main.i < items.size()) && (Main.oinv == false)) {
 				
-				String current = items.get(i);
+				//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_BLUE + "debug int " + Main.i + " Slot" + slot);
+				//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_BLUE + "debug0 (total i)" + ChatColor.GRAY + totali);
+				
+				String current = items.get(Main.i);
 				String[] split = current.split("-");
 				String block = split[0];
 				String name = split[1];
@@ -44,64 +138,77 @@ public class LoadInv extends AbstractFile {
 		        
 		        //Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_BLUE + "debug2");
 		        
-		        if ((biome == "plains") && i < 39) {
+		        if ((biome == "plains") && slot < 36) {
 		        	
-		        	Inventories.plains.setItem(i, item);
-		        	i += 1;
+		        	Inventories.plains.setItem(slot, item);
+		        	slot += 1;
+		        	Main.i += 1;
 		        	
 		        	//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_BLUE + "debug plains");
 		        	
-		        } else if ((biome == "desert") && i < 39) {
+		        } else if ((biome == "desert") && slot < 36) {
 		        	
-		        	Inventories.desert.setItem(i, item);
-		        	i += 1;
+		        	Inventories.desert.setItem(slot, item);
+		        	slot += 1;
+		        	Main.i += 1;
 		        	
 		        	//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_BLUE + "debug desert");
 		        	
-		        } else if ((biome == "ocean") && i < 39) {
+		        } else if ((biome == "ocean") && slot < 36) {
 		        	
-		        	Inventories.ocean.setItem(i, item);
-		        	i += 1;
+		        	Inventories.ocean.setItem(slot, item);
+		        	slot += 1;
+		        	Main.i += 1;
 		        	
 		        	//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_BLUE + "debug ocean");
 		        	
-		        } else if ((biome == "forest") && i < 39) {
+		        } else if ((biome == "forest") && slot < 36) {
 		        	
-		        	Inventories.forest.setItem(i, item);
-		        	i += 1;
+		        	Inventories.forest.setItem(slot, item);
+		        	slot += 1;
+		        	Main.i += 1;
 		        	
 		        	//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_BLUE + "debug forest");
 		        	
-		        } else if ((biome == "savanna") && i < 39) {
+		        } else if ((biome == "savanna") && slot < 36) {
 		        	
-		        	Inventories.savanna.setItem(i, item);
-		        	i += 1;
+		        	Inventories.savanna.setItem(slot, item);
+		        	slot += 1;
+		        	Main.i += 1;
 		        	
 		        	//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_BLUE + "debug savanna");
 		        
-		        } else if ((biome == "taiga") && i < 39) {
+		        } else if ((biome == "taiga") && slot < 36) {
 		        	
-		        	Inventories.taiga.setItem(i, item);
-		        	i += 1;
+		        	Inventories.taiga.setItem(slot, item);
+		        	slot += 1;
+		        	Main.i += 1;
 		        	
 		        	//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_BLUE + "debug taiga");
 		        
-		        } else if ((biome == "extremehills") && i < 39) {
+		        } else if ((biome == "extremehills") && slot < 36) {
 		        	
-		        	Inventories.extremehills.setItem(i, item);
-		        	i += 1;
+		        	Inventories.extremehills.setItem(slot, item);
+		        	slot += 1;
+		        	Main.i += 1;
 		        	
 		        	//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_BLUE + "debug extremehills");
 		        
-		        } else if ((i > 38) && (i < 44)) {
+		        } else if (slot >= totali) {
 		        	
-		        	Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_AQUA + biome + ChatColor.DARK_RED + " Inventory Overflow!");
-		        	i += 1;
+		        	//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_AQUA + biome + ChatColor.DARK_RED + " Inventory Overflow!" + ChatColor.GRAY + " (Debug int) Value:" + Main.i);
+		        	Main.oinv = true;
+		        	break;
+		        	
+		        } else if (slot > totali + 5) {
+		        	
+		        	Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_AQUA + biome + ChatColor.DARK_RED + " Int i is too big!");
+		        	break;
 		        	
 		        } else {
 		        	
 		        	Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_AQUA + biome + ChatColor.DARK_RED + " Invalid Biome!");
-		        	i += 1;
+		        	break;
 		        	
 		        }
 			}
