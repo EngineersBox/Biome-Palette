@@ -1,6 +1,8 @@
 package me.engineersbox.menuinv;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,8 +13,8 @@ import me.engineersbox.menuinv.InvConfig;
 
 public class Main extends JavaPlugin implements Listener {
 	
-	static FileConfiguration config;
-	static File cfile;
+	public static FileConfiguration config;
+	public static File cfile;
 	
 	//Global Strings
 	public static String biome = "";
@@ -21,6 +23,10 @@ public class Main extends JavaPlugin implements Listener {
 	public static Integer chunkinfo = 0;
 	public static String mater = "";
 	public static String inv = null;
+	public static int cinv = 0;
+	public static boolean oinv = false;
+	public static int i = 0;
+	public static List<String> BiomeList = Arrays.asList("desert", "plains", "forest", "extremehills", "savanna", "taiga", "ocean");
 	
     public void onEnable() {
     	
@@ -45,10 +51,10 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("bp add").setExecutor(new Commands());
         getCommand("bp reload").setExecutor(new Commands());
     }
- 
+    
     @Override
     public void onDisable() {
-    	AbstractFile.save();
+    	AbstractFile.saveConfig();
     }
     
 }
