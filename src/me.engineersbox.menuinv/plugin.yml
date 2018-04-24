@@ -1,6 +1,6 @@
 name: BlockPalette
 main: me.engineersbox.menuinv.Main
-version: 1.7 BETA
+version: v1.1 Full Release
 author: EngineersBox
 description: Block Biome Palettes
 commands:
@@ -40,6 +40,10 @@ commands:
         description: Adds A Block To The BlockPalette, Given Via Arguments
         usage: /bp add <biome> <block> <name>
         permission: bp.add
+    bp remove:
+        description: Adds A Block To The BlockPalette, Given Via Arguments
+        usage: /bp remove <biome> <block> <name>
+        permission: bp.remove
     bp version:
         description: Displays Plugin Version Information
         usage: /bp version
@@ -61,6 +65,7 @@ permissions:
             bp.chunkinfo: true
             bp.settings: true
             bp.add: true
+            bp.remove: true
             bp.version: true
             bp.reload: true
     bp.open:
@@ -89,6 +94,9 @@ permissions:
         default: true
     bp.add:
         description: Gives Access To Add Custom Blocks To BlockPallete Inventory
+        default: op
+    bp.remove:
+        description: Gives Access To Remove Custom Blocks From BlockPallete Inventory
         default: op
     bp.version:
         description: Gives Access To View Current Plugin Version
