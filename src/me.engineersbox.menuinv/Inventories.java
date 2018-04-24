@@ -248,20 +248,7 @@ public class Inventories {
 	        ItemMeta im4 = next.getItemMeta();
 	        im4.setDisplayName(ChatColor.DARK_GREEN + "Next Page");
 	        next.setItemMeta(im4);
-	        
-	        
-	        ItemStack redsand_layer = new ItemStack(Material.SNOW, 1);
-	        ItemMeta im5 = redsand_layer.getItemMeta();
-	        im5.setDisplayName("Red Sand Layer");
-	        ArrayList<String> Lore = new ArrayList<String>();
-	        Lore.add("");
-	        Lore.add(ChatColor.YELLOW + "Base Block:");
-	        Lore.add(ChatColor.YELLOW + "snow_layer");
-	        im5.setLore(Lore);
-	        redsand_layer.setItemMeta(im5);
-	        
-	        extremehills.setItem(0, redsand_layer);
-	        
+	       
 	        extremehills.setItem(39, prev);
 	        extremehills.setItem(40, eye);
 	        extremehills.setItem(41, next);
@@ -298,19 +285,6 @@ public class Inventories {
 	        ItemMeta im4 = next.getItemMeta();
 	        im4.setDisplayName(ChatColor.DARK_GREEN + "Next Page");
 	        next.setItemMeta(im4);
-	        
-	        
-	        ItemStack gravel_layer = new ItemStack(Material.SNOW, 1);
-	        ItemMeta im5 = gravel_layer.getItemMeta();
-	        im5.setDisplayName("Gravel Layer");
-	        ArrayList<String> Lore = new ArrayList<String>();
-	        Lore.add("");
-	        Lore.add(ChatColor.YELLOW + "Base Block:");
-	        Lore.add(ChatColor.YELLOW + "snow_layer");
-	        im5.setLore(Lore);
-	        gravel_layer.setItemMeta(im5);
-	        
-	        savanna.setItem(0, gravel_layer);
 	        
 	        savanna.setItem(39, prev);
 	        savanna.setItem(40, eye);
@@ -349,19 +323,6 @@ public class Inventories {
 	        im4.setDisplayName(ChatColor.DARK_GREEN + "Next Page");
 	        next.setItemMeta(im4);
 	        
-	        
-	        ItemStack cdirt_layer = new ItemStack(Material.SNOW, 1);
-	        ItemMeta im5 = cdirt_layer.getItemMeta();
-	        im5.setDisplayName("Coarse Dirt Layer");
-	        ArrayList<String> Lore = new ArrayList<String>();
-	        Lore.add("");
-	        Lore.add(ChatColor.YELLOW + "Base Block:");
-	        Lore.add(ChatColor.YELLOW + "snow_layer");
-	        im5.setLore(Lore);
-	        cdirt_layer.setItemMeta(im5);
-	        
-	        taiga.setItem(0, cdirt_layer);
-	        
 	        taiga.setItem(39, prev);
 	        taiga.setItem(40, eye);
 	        taiga.setItem(41, next);
@@ -398,19 +359,6 @@ public class Inventories {
 	        ItemMeta im4 = next.getItemMeta();
 	        im4.setDisplayName(ChatColor.DARK_GREEN + "Next Page");
 	        next.setItemMeta(im4);
-	        
-	        
-	        ItemStack rsandstone_layer = new ItemStack(Material.SNOW, 1);
-	        ItemMeta im5 = rsandstone_layer.getItemMeta();
-	        im5.setDisplayName("Red Sandstone Layer");
-	        ArrayList<String> Lore = new ArrayList<String>();
-	        Lore.add("");
-	        Lore.add(ChatColor.YELLOW + "Base Block:");
-	        Lore.add(ChatColor.YELLOW + "snow_layer");
-	        im5.setLore(Lore);
-	        rsandstone_layer.setItemMeta(im5);
-	        
-	        ocean.setItem(0, rsandstone_layer);
 	        
 	        ocean.setItem(39, prev);
 	        ocean.setItem(40, eye);
