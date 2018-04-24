@@ -19,7 +19,13 @@ public class LoadInv extends AbstractFile {
        
     }
 
-	public static void getItemList(String biome) {
+	public static void setItemList(String biome) {
+		
+		/*Exception e = new NullPointerException();
+    	
+    	StringWriter outError = new StringWriter();
+    	e.printStackTrace(new PrintWriter(outError));
+    	String errorString = outError.toString();*/ //stack trace string [debug]
 		
 		int slot = 0;
 		int totali = Main.i * Main.cinv;
@@ -143,6 +149,7 @@ public class LoadInv extends AbstractFile {
 		        	Inventories.plains.setItem(slot, item);
 		        	slot += 1;
 		        	Main.i += 1;
+		        	saveConfig();
 		        	
 		        	//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_BLUE + "debug plains");
 		        	
@@ -151,6 +158,7 @@ public class LoadInv extends AbstractFile {
 		        	Inventories.desert.setItem(slot, item);
 		        	slot += 1;
 		        	Main.i += 1;
+		        	saveConfig();
 		        	
 		        	//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_BLUE + "debug desert");
 		        	
@@ -159,6 +167,7 @@ public class LoadInv extends AbstractFile {
 		        	Inventories.ocean.setItem(slot, item);
 		        	slot += 1;
 		        	Main.i += 1;
+		        	saveConfig();
 		        	
 		        	//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_BLUE + "debug ocean");
 		        	
@@ -167,6 +176,7 @@ public class LoadInv extends AbstractFile {
 		        	Inventories.forest.setItem(slot, item);
 		        	slot += 1;
 		        	Main.i += 1;
+		        	saveConfig();
 		        	
 		        	//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_BLUE + "debug forest");
 		        	
@@ -175,6 +185,7 @@ public class LoadInv extends AbstractFile {
 		        	Inventories.savanna.setItem(slot, item);
 		        	slot += 1;
 		        	Main.i += 1;
+		        	saveConfig();
 		        	
 		        	//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_BLUE + "debug savanna");
 		        
@@ -183,6 +194,7 @@ public class LoadInv extends AbstractFile {
 		        	Inventories.taiga.setItem(slot, item);
 		        	slot += 1;
 		        	Main.i += 1;
+		        	saveConfig();
 		        	
 		        	//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_BLUE + "debug taiga");
 		        
@@ -191,6 +203,7 @@ public class LoadInv extends AbstractFile {
 		        	Inventories.extremehills.setItem(slot, item);
 		        	slot += 1;
 		        	Main.i += 1;
+		        	saveConfig();
 		        	
 		        	//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_BLUE + "debug extremehills");
 		        
@@ -202,13 +215,14 @@ public class LoadInv extends AbstractFile {
 		        	
 		        } else if (slot > totali + 5) {
 		        	
-		        	Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_AQUA + biome + ChatColor.DARK_RED + " Int i is too big!");
+		        	Bukkit.getConsoleSender().sendMessage(Main.prefix + ChatColor.DARK_AQUA + biome + ChatColor.DARK_RED + " Int i is too big!");
 		        	break;
 		        	
 		        } else {
 		        	
-		        	Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_AQUA + biome + ChatColor.DARK_RED + " Invalid Biome!");
-		        	break;
+		        	Bukkit.getConsoleSender().sendMessage(Main.prefix + ChatColor.DARK_AQUA + biome + ChatColor.DARK_RED + " Invalid Biome!");
+		        	throw new NullPointerException("Invalid Biome");
+		        	//break;
 		        	
 		        }
 			}
@@ -219,6 +233,15 @@ public class LoadInv extends AbstractFile {
 			
 		}
 		
+		
+	}
+	
+	public static void removeItemList(String biome, String block, String name) {
+		
+		String blockitem = block.toUpperCase() + "-" + name;
+		config.getList(biome).remove(config.getStringList(biome).indexOf(blockitem));
+		//Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_AQUA + biome + ChatColor.DARK_RED + "removed"); //debug
+		saveConfig();
 		
 	}
 	
