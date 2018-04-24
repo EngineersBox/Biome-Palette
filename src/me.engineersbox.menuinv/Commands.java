@@ -245,48 +245,12 @@ public class Commands implements CommandExecutor {
                 				
                 				Main.mater = block.toUpperCase();
                 				
-                				if (biome.equalsIgnoreCase("plains")) {
+                				if ((biome.equalsIgnoreCase("plains")) || (biome.equalsIgnoreCase("desert")) || (biome.equalsIgnoreCase("ocean")) || (biome.equalsIgnoreCase("forest")) || (biome.equalsIgnoreCase("savanna")) || (biome.equalsIgnoreCase("taiga")) || (biome.equalsIgnoreCase("extremehills"))) {
                 					
                 					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Added " + Main.mater + " [" + name + "]" + " To " + biome.substring(0, 1).toUpperCase() + biome.substring(1).toLowerCase());
                 					InvConfig.newInv(biome, block, name);
                     				AbstractFile.saveConfig();
                 					
-                				} else if (biome.equalsIgnoreCase("desert")) {
-                					
-                					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Added " + Main.mater + " [" + name + "]" + " To " + biome.substring(0, 1).toUpperCase() + biome.substring(1).toLowerCase());
-                					InvConfig.newInv(biome, block, name);
-                    				AbstractFile.saveConfig();
-                    				
-                				} else if (biome.equalsIgnoreCase("ocean")) {
-                					
-                					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Added " + Main.mater + " [" + name + "]" + " To " + biome.substring(0, 1).toUpperCase() + biome.substring(1).toLowerCase());
-                					InvConfig.newInv(biome, block, name);
-                    				AbstractFile.saveConfig();
-                    				
-                				} else if (biome.equalsIgnoreCase("forest")) {
-                					
-                					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Added " + Main.mater + " [" + name + "]" + " To " + biome.substring(0, 1).toUpperCase() + biome.substring(1).toLowerCase());
-                					InvConfig.newInv(biome, block, name);
-                    				AbstractFile.saveConfig();
-                    				
-                				} else if (biome.equalsIgnoreCase("savanna")) {
-                					
-                					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Added " + Main.mater + " [" + name + "]" + " To " + biome.substring(0, 1).toUpperCase() + biome.substring(1).toLowerCase());
-                					InvConfig.newInv(biome, block, name);
-                    				AbstractFile.saveConfig();
-                    				
-                				} else if (biome.equalsIgnoreCase("taiga")) {
-                					
-                					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Added " + Main.mater + " [" + name + "]" + " To " + biome.substring(0, 1).toUpperCase() + biome.substring(1).toLowerCase());
-                					InvConfig.newInv(biome, block, name);
-                    				AbstractFile.saveConfig();
-                    			
-                				} else if (biome.equalsIgnoreCase("extremehills")) {
-                					
-                					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Added " + Main.mater + " [" + name + "]" + " To " + biome.substring(0, 1).toUpperCase() + biome.substring(1).toLowerCase());
-                					InvConfig.newInv(biome, block, name);
-                    				AbstractFile.saveConfig();
-                    				
                 				} else {
                 					p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Biome!");
                 				}
