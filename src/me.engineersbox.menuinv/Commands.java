@@ -40,7 +40,9 @@ public class Commands implements CommandExecutor {
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp getbiome <enable/disable> " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Changes Tool To Identify The Biome Of A Selected Block");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp biomelist " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays The Valid Biomes For /bp tool biome");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp chunkinfo <enable/disable> " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays Chunk Data When Using /bp tool");
+	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp settings " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays Current chunkinfo and getbiome Settings");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp add <biome> <block> <name>" + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Adds A Block To The BlockPalette, Given Via Arguments");
+	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp remove <biome> <block> <name>" + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Removes A Block From The BlockPalette, Given Via Arguments");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp version " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays The Plugin Version And Author");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp reload " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Reloads The BlockPalette Plugin");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp help " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Opens This Menu");
@@ -288,6 +290,7 @@ public class Commands implements CommandExecutor {
                 				} else {
                 					p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Biome!");
                 				}
+                				
                 			} else {
                 				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Block/Material!");
                 			}
@@ -298,7 +301,39 @@ public class Commands implements CommandExecutor {
             				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Usage: " + ChatColor.ITALIC + "/bp add <biome> <block> <name>");
             				
             			}
+            		
+            		} else if ((args[0].equalsIgnoreCase("remove")) && (p.hasPermission("bp.remove"))) {
             			
+            			if (args.length == 4) {
+            				
+            				String biome = args[1].toLowerCase();
+                			String block = args[2].toLowerCase();
+                			String name = args[3].toLowerCase();
+                			
+                			if (Material.matchMaterial(block.toUpperCase()) != null) {
+                				
+                				Main.mater = block.toUpperCase();
+                				
+                				if ((biome.equalsIgnoreCase("plains")) || (biome.equalsIgnoreCase("desert")) || (biome.equalsIgnoreCase("ocean")) || (biome.equalsIgnoreCase("forest")) || (biome.equalsIgnoreCase("savanna")) || (biome.equalsIgnoreCase("taiga")) || (biome.equalsIgnoreCase("extremehills"))) {
+                					
+                					LoadInv.removeItemList(args[1], args[2], args[3]);
+                					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Removed " + Main.mater + " [" + name + "] From " + biome.substring(0, 1).toUpperCase() + biome.substring(1).toLowerCase());
+                    				
+                				} else {
+                					p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Biome!");
+                				}
+                				
+                			} else {
+                				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Block/Material!");
+                			}
+            				
+            			} else if (args.length < 4) {
+            				
+            				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Syntax!");
+            				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Usage: " + ChatColor.ITALIC + "/bp remove <biome> <block> <name>");
+            				
+            			}
+            		
             		} else  if ((!p.hasPermission("help")) || (!p.hasPermission("tool")) || (!p.hasPermission("open")) || (!p.hasPermission("setbiome")) || (!p.hasPermission("getbiome")) || (!p.hasPermission("biomelist")) || (!p.hasPermission("chunkinfo")) || (!p.hasPermission("settings")) || (!p.hasPermission("add")) || (!p.hasPermission("version")) || (!p.hasPermission("reload"))) {	
             		
             			p.sendMessage(Main.prefix + ChatColor.RED + "You Do Not Have Permission!");
