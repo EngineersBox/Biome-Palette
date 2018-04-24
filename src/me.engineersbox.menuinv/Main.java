@@ -49,6 +49,7 @@ public class Main extends JavaPlugin implements Listener {
         getCommand("bp version").setExecutor(new Commands());
         getCommand("bp settings").setExecutor(new Commands());
         getCommand("bp add").setExecutor(new Commands());
+        getCommand("bp remove").setExecutor(new Commands());
         getCommand("bp reload").setExecutor(new Commands());
     }
     
