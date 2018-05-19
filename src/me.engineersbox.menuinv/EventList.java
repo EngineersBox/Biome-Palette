@@ -23,10 +23,7 @@ public class EventList implements Listener {
 		Player p = event.getPlayer();
 		EquipmentSlot hand = event.getHand();
 		
-		if (hand.equals(EquipmentSlot.HAND)) {
-			
-			if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-		        if (p.getInventory().getItemInMainHand().equals(Item.tool)) {
+		if ((event.useInteractedBlock() != null) && (hand != null) && (event.getClickedBlock() != null) && (hand.equals(EquipmentSlot.HAND)) && (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) && ((p.getInventory().getItemInMainHand().equals(Item.tool) || (p.getInventory().getItemInOffHand().equals(Item.tool))))) {
 		            
 		        	if (Main.getB == 1) {
 		        		
@@ -92,96 +89,89 @@ public class EventList implements Listener {
 			        		
 			        	}
 		        	}
+		        } else {
+		        	return;
 		        }
 		    }
-			
-		}
-	}
-	
 	
     @EventHandler
     public void onPlayerClickGUI(InventoryClickEvent e) {
+    	
         Player p = (Player) e.getWhoClicked();
-        //ItemStack item = e.getCurrentItem();
         int slot = e.getRawSlot();
+        Boolean exitflag = false;
+        
+        if (e.getSlot() == -999) {
+            return;
+        }
+
+        if (slot >= 0 && slot < 9 * 3) {
+            e.setCancelled(true);
+            //p.sendMessage("Event Cancelled!"); //debug
+        }
+        
+        if (e.getCurrentItem() == null) {
+        	
+        	return;
+        	
+        } else if ((e.getCurrentItem().getType() == Material.OBSIDIAN) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
+        	
+        	exitflag = true;
+        	Main.cinv = 0;
+        	Main.i = 0;
+        	p.closeInventory();
+        	
+        } else if ((e.getCurrentItem().getType() == Material.BOOK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "BACK TO MAIN"))) {
+    		
+    		exitflag = true;
+        	Main.cinv = 0;
+        	Main.i = 0;
+        	p.openInventory(Inventories.main);
+        
+        }
         
         if (e.getInventory().getTitle().equals(ChatColor.DARK_RED + "           " + Main.prefix)) { //main inventory
-            if (e.getSlot() == -999) {
-                return;
-            }
-
-            if (slot >= 0 && slot < 9 * 3) {
-                e.setCancelled(true);
-                //p.sendMessage("Event Cancelled!"); //debug
+            
+            if (e.getCurrentItem().getItemMeta() != null) {
+            	
+            	String currentItem = ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName().toLowerCase());
+            	
+            	if (Main.BiomeList.contains(currentItem)) {
+            		
+            		Main.i = 0;
+            		Inventories.openStoredInv(e, currentItem);
+            		
+            	} else if (exitflag == true) {
+            		
+            		exitflag = false;
+            		return;
+            		
+            	} else {
+            		
+            		p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Biome!");
+            		
+            	}
+            	
+            } else {
+            	
+            	return;
+            	
             }
             
-            if ((e.getCurrentItem().getType() == Material.OBSIDIAN) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
-            	p.closeInventory();
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.SAND) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GOLD + "DESERT"))) {
-            	Main.i = 0;
-            	LoadInv.getItemList("desert");
-            	p.openInventory(Inventories.desert);
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.GRASS) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_GREEN + "PLAINS"))) {
-            	LoadInv.getItemList("plains");
-            	p.openInventory(Inventories.plains);
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.LEAVES) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GREEN + "FOREST"))) {
-            	LoadInv.getItemList("forest");
-            	p.openInventory(Inventories.forest);
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.STONE) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_GRAY + "EXTREME HILLS"))) {
-            	LoadInv.getItemList("extremehills");
-            	p.openInventory(Inventories.extremehills);
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.LOG_2) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "SAVANNA"))) {
-            	LoadInv.getItemList("savanna");
-            	p.openInventory(Inventories.savanna);
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.SNOW_BLOCK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.WHITE + "TAIGA"))) {
-            	LoadInv.getItemList("taiga");
-            	p.openInventory(Inventories.taiga);
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.PRISMARINE) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_BLUE + "OCEAN"))) {
-            	LoadInv.getItemList("ocean");
-            	p.openInventory(Inventories.ocean);
+            if (e.getCurrentItem() == null) {
+            	
+            	return;
+            	
             }
         }
+
         
         
         if (e.getInventory().getTitle().equals(Main.prefix + ChatColor.GOLD + "Desert")) { //desert inventory
-            if (e.getSlot() == -999) {
-                return;
-            }
-
-            if (slot >= 0 && slot < 9 * 5) {
-                e.setCancelled(true);
-                //p.sendMessage("Event Cancelled!"); //debug
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.OBSIDIAN) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
-            	Main.cinv = 0;
-            	Main.i = 0;
-            	p.closeInventory();
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.BOOK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "BACK TO MAIN"))) {
-            	Main.cinv = 0;
-            	Main.i = 0;
-            	p.openInventory(Inventories.main);
-            }
             
             if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_GREEN + "Next Page")) && (Main.oinv == true)) {
             	Main.cinv += 1;
-            	LoadInv.getItemList("desert");
+            	LoadInv.setItemList("desert");
             	p.openInventory(Inventories.desert);
             	//p.sendMessage("Completed " + Main.oinv);
             }
@@ -189,7 +179,7 @@ public class EventList implements Listener {
             if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Previous Page")) && (Main.cinv > 0)) {
             	Main.cinv -= 1;
             	Main.i = 36 * Main.cinv;
-            	LoadInv.getItemList("desert");
+            	LoadInv.setItemList("desert");
             	p.openInventory(Inventories.desert);
             }
         
@@ -197,30 +187,10 @@ public class EventList implements Listener {
         
         
         if (e.getInventory().getTitle().equals(Main.prefix + ChatColor.DARK_GREEN + "Plains")) { //plains inventory
-            if (e.getSlot() == -999) {
-                return;
-            }
-
-            if (slot >= 0 && slot < 9 * 5) {
-                e.setCancelled(true);
-                //p.sendMessage("Event Cancelled!"); //debug
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.OBSIDIAN) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
-            	Main.cinv = 0;
-            	Main.i = 0;
-            	p.closeInventory();
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.BOOK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "BACK TO MAIN"))) {
-            	Main.cinv = 0;
-            	Main.i = 0;
-            	p.openInventory(Inventories.main);
-            }
-            
+        	
             if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_GREEN + "Next Page")) && (Main.oinv == true)) {
             	Main.cinv += 1;
-            	LoadInv.getItemList("plains");
+            	LoadInv.setItemList("plains");
             	p.openInventory(Inventories.plains);
             	//p.sendMessage("Completed " + Main.oinv);
             }
@@ -228,37 +198,17 @@ public class EventList implements Listener {
             if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Previous Page")) && (Main.cinv > 0)) {
             	Main.cinv -= 1;
             	Main.i = 36 * Main.cinv;
-            	LoadInv.getItemList("plains");
+            	LoadInv.setItemList("plains");
             	p.openInventory(Inventories.plains);
             }
         
         }
         
         if (e.getInventory().getTitle().equals(Main.prefix + ChatColor.GREEN + "Forest")) { //forest inventory
-            if (e.getSlot() == -999) {
-                return;
-            }
-
-            if (slot >= 0 && slot < 9 * 5) {
-                e.setCancelled(true);
-                //p.sendMessage("Event Cancelled!"); //debug
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.OBSIDIAN) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
-            	Main.cinv = 0;
-            	Main.i = 0;
-            	p.closeInventory();
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.BOOK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "BACK TO MAIN"))) {
-            	Main.cinv = 0;
-            	Main.i = 0;
-            	p.openInventory(Inventories.main);
-            }
             
             if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_GREEN + "Next Page")) && (Main.oinv == true)) {
             	Main.cinv += 1;
-            	LoadInv.getItemList("forest");
+            	LoadInv.setItemList("forest");
             	p.openInventory(Inventories.forest);
             	//p.sendMessage("Completed " + Main.oinv);
             }
@@ -266,7 +216,7 @@ public class EventList implements Listener {
             if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Previous Page")) && (Main.cinv > 0)) {
             	Main.cinv -= 1;
             	Main.i = 36 * Main.cinv;
-            	LoadInv.getItemList("forest");
+            	LoadInv.setItemList("forest");
             	p.openInventory(Inventories.forest);
             }
         
@@ -274,30 +224,10 @@ public class EventList implements Listener {
         
         
         if (e.getInventory().getTitle().equals(Main.prefix + ChatColor.DARK_GRAY + "Extreme Hills")) { //extreme hills inventory
-            if (e.getSlot() == -999) {
-                return;
-            }
-
-            if (slot >= 0 && slot < 9 * 5) {
-                e.setCancelled(true);
-                //p.sendMessage("Event Cancelled!"); //debug
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.OBSIDIAN) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
-            	Main.cinv = 0;
-            	Main.i = 0;
-            	p.closeInventory();
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.BOOK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "BACK TO MAIN"))) {
-            	Main.cinv = 0;
-            	Main.i = 0;
-            	p.openInventory(Inventories.main);
-            }
             
             if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_GREEN + "Next Page")) && (Main.oinv == true)) {
             	Main.cinv += 1;
-            	LoadInv.getItemList("extremehills");
+            	LoadInv.setItemList("extremehills");
             	p.openInventory(Inventories.extremehills);
             	//p.sendMessage("Completed " + Main.oinv);
             }
@@ -305,7 +235,7 @@ public class EventList implements Listener {
             if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Previous Page")) && (Main.cinv > 0)) {
             	Main.cinv -= 1;
             	Main.i = 36 * Main.cinv;
-            	LoadInv.getItemList("extremehills");
+            	LoadInv.setItemList("extremehills");
             	p.openInventory(Inventories.extremehills);
             }
         
@@ -313,30 +243,10 @@ public class EventList implements Listener {
         
         
         if (e.getInventory().getTitle().equals(Main.prefix + ChatColor.DARK_RED + "Savanna")) { //savanna inventory
-            if (e.getSlot() == -999) {
-                return;
-            }
-
-            if (slot >= 0 && slot < 9 * 5) {
-                e.setCancelled(true);
-                //p.sendMessage("Event Cancelled!"); //debug
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.OBSIDIAN) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
-            	Main.cinv = 0;
-            	Main.i = 0;
-            	p.closeInventory();
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.BOOK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "BACK TO MAIN"))) {
-            	Main.cinv = 0;
-            	Main.i = 0;
-            	p.openInventory(Inventories.main);
-            }
             
             if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_GREEN + "Next Page")) && (Main.oinv == true)) {
             	Main.cinv += 1;
-            	LoadInv.getItemList("savanna");
+            	LoadInv.setItemList("savanna");
             	p.openInventory(Inventories.savanna);
             	//p.sendMessage("Completed " + Main.oinv);
             }
@@ -344,7 +254,7 @@ public class EventList implements Listener {
             if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Previous Page")) && (Main.cinv > 0)) {
             	Main.cinv -= 1;
             	Main.i = 36 * Main.cinv;
-            	LoadInv.getItemList("savanna");
+            	LoadInv.setItemList("savanna");
             	p.openInventory(Inventories.savanna);
             }
         
@@ -352,30 +262,10 @@ public class EventList implements Listener {
         
         
         if (e.getInventory().getTitle().equals(Main.prefix + ChatColor.WHITE + "Taiga")) { //taiga inventory
-            if (e.getSlot() == -999) {
-                return;
-            }
-
-            if (slot >= 0 && slot < 9 * 5) {
-                e.setCancelled(true);
-                //p.sendMessage("Event Cancelled!"); //debug
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.OBSIDIAN) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
-            	Main.cinv = 0;
-            	Main.i = 0;
-            	p.closeInventory();
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.BOOK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "BACK TO MAIN"))) {
-            	Main.cinv = 0;
-            	Main.i = 0;
-            	p.openInventory(Inventories.main);
-            }
             
             if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_GREEN + "Next Page")) && (Main.oinv == true)) {
             	Main.cinv += 1;
-            	LoadInv.getItemList("taiga");
+            	LoadInv.setItemList("taiga");
             	p.openInventory(Inventories.taiga);
             	//p.sendMessage("Completed " + Main.oinv);
             }
@@ -383,7 +273,7 @@ public class EventList implements Listener {
             if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Previous Page")) && (Main.cinv > 0)) {
             	Main.cinv -= 1;
             	Main.i = 36 * Main.cinv;
-            	LoadInv.getItemList("taiga");
+            	LoadInv.setItemList("taiga");
             	p.openInventory(Inventories.taiga);
             }
         
@@ -391,30 +281,10 @@ public class EventList implements Listener {
         
         
         if (e.getInventory().getTitle().equals(Main.prefix + ChatColor.DARK_BLUE + "Ocean")) { //ocean inventory
-            if (e.getSlot() == -999) {
-                return;
-            }
-
-            if (slot >= 0 && slot < 9 * 5) {
-                e.setCancelled(true);
-                //p.sendMessage("Event Cancelled!"); //debug
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.OBSIDIAN) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.GRAY + "EXIT"))) {
-            	Main.cinv = 0;
-            	Main.i = 0;
-            	p.closeInventory();
-            }
-            
-            if ((e.getCurrentItem().getType() == Material.BOOK) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_RED + "BACK TO MAIN"))) {
-            	Main.cinv = 0;
-            	Main.i = 0;
-            	p.openInventory(Inventories.main);
-            }
             
             if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.DARK_GREEN + "Next Page")) && (Main.oinv == true)) {
             	Main.cinv += 1;
-            	LoadInv.getItemList("ocean");
+            	LoadInv.setItemList("ocean");
             	p.openInventory(Inventories.ocean);
             	//p.sendMessage("Completed " + Main.oinv);
             }
@@ -422,7 +292,7 @@ public class EventList implements Listener {
             if ((e.getCurrentItem().getType() == Material.PAPER) && (e.getCurrentItem().getItemMeta().getDisplayName().equals(ChatColor.AQUA + "Previous Page")) && (Main.cinv > 0)) {
             	Main.cinv -= 1;
             	Main.i = 36 * Main.cinv;
-            	LoadInv.getItemList("ocean");
+            	LoadInv.setItemList("ocean");
             	p.openInventory(Inventories.ocean);
             }
         
