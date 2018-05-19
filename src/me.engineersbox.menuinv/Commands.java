@@ -1,324 +1,423 @@
 package me.engineersbox.menuinv;
 
+import java.util.ArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
-import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
-import me.engineersbox.menuinv.InvConfig;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
-public class Commands implements CommandExecutor {
-
-	@Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-    	
-    	Player p = (Player) sender;
-    	
-        if (sender instanceof Player) {
-        	
-            if ((cmd.getName().equalsIgnoreCase("bp")) && (p.hasPermission("bp.open"))) {
-            	
-            	if (args.length == 0) {
-            		
-            		p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Opening Palette!");
-                    p.openInventory(Inventories.main);
-                    
-            	} else if (args.length > 0) {
-            		
-            		if ((args[0].equalsIgnoreCase("help")) && (p.hasPermission("bp.help"))) {
-            			
-	            		p.sendMessage("");
-	                	p.sendMessage(ChatColor.DARK_GRAY + "----={<" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Help" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
-	                	p.sendMessage("");
-	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Opens The Block Palette Interface");
-	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp tool " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Gives The Block Biome Altering Tool");
-	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp setbiome <biome>" + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Sets The Biome To Be Used with /bp tool");
-	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp getbiome <enable/disable> " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Changes Tool To Identify The Biome Of A Selected Block");
-	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp biomelist " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays The Valid Biomes For /bp tool biome");
-	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp chunkinfo <enable/disable> " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays Chunk Data When Using /bp tool");
-	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp settings " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays Current chunkinfo and getbiome Settings");
-	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp add <biome> <block> <name>" + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Adds A Block To The BlockPalette, Given Via Arguments");
-	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp remove <biome> <block> <name>" + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Removes A Block From The BlockPalette, Given Via Arguments");
-	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp version " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays The Plugin Version And Author");
-	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp reload " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Reloads The BlockPalette Plugin");
-	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp help " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Opens This Menu");
-	                	p.sendMessage("");
-	                	p.sendMessage(ChatColor.DARK_GRAY + "----=<{" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Help" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
-	                	p.sendMessage("");
-                	
-            		} else if ((args[0].equalsIgnoreCase("tool")) && (p.hasPermission("bp.tool"))) {
-            			
-            			p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Giving Block Biome Tool!");
-            			p.getInventory().addItem(Item.tool);
-            			
-            		} else if ((args[0].equalsIgnoreCase("setbiome")) && (p.hasPermission("bp.setbiome"))) {
-            			
-            			if (args.length == 2) {
-            				
-            				if ((args[1].equalsIgnoreCase("desert")) || (args[1].equalsIgnoreCase("forest")) || (args[1].equalsIgnoreCase("ocean")) || (args[1].equalsIgnoreCase("extremehills")) || (args[1].equalsIgnoreCase("taiga")) || (args[1].equalsIgnoreCase("plains"))) {
-            					
-            					Main.biome = args[1];
-            					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Biome Set To: " + ChatColor.DARK_GREEN + args[1].substring(0, 1).toUpperCase() + args[1].substring(1).toLowerCase());
-            					
-            				} else {
-            					
-            					Main.biome = "";
-                				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Biome!");
-                				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "View Valid Biomes With: "  + ChatColor.ITALIC + "/bp biomelist");
-            					
-            				}
-            				
-            			} else if (args.length == 1) {
-            				
-            				Main.biome = "";
-            				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Syntax!");
-            				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Usage: " + ChatColor.ITALIC + "/bp setbiome <biome>");
-            	
-            			}
-            			
-            		
-            		} else if ((args[0].equalsIgnoreCase("getbiome")) && (p.hasPermission("bp.getbiome"))) {
-            			
-            			if (args.length == 2) {
-            				
-            				if (args[1].equalsIgnoreCase("enable")) {
-            					
-            					if (Main.getB == 0) {
-            						
-            						Main.getB = 1;
-            						p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Get Biome Enabled!");
-            						
-            					} else if (Main.getB == 1) {
-            						
-            						p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Error: Get Biome Already Enabled!");
-            						
-            					}
-            					
-            					
-            				} else if (args[1].equalsIgnoreCase("disable")) {
-            					
-            					if (Main.getB == 1) {
-            						
-            						Main.getB = 0;
-            						p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Get Biome Disabled!");
-            						
-            					} else if (Main.getB == 0) {
-            						
-            						p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Error: Get Biome Already Disabled!");
-            						
-            					}
-            					
-            				} else {
-            					
-            					p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Syntax!");
-                				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Usage: " + ChatColor.ITALIC + "/bp getbiome <enable/disable>");
-            					
-            				}
-            				
-            			}
-            			
-            		} else if ((args[0].equalsIgnoreCase("chunkinfo")) && (p.hasPermission("bp.chunkinfo"))) {
-            			
-            			if (args.length == 2) {
-            				
-            				if (args[1].equalsIgnoreCase("enable")) {
-            					
-            					if (Main.chunkinfo == 0) {
-            						
-            						Main.chunkinfo = 1;
-            						p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Chunk Info Enabled!");
-            						
-            					} else if (Main.chunkinfo == 1) {
-            						
-            						p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Error: Chunk Info Already Enabled!");
-            						
-            					}
-            					
-            					
-            				} else if (args[1].equalsIgnoreCase("disable")) {
-            					
-            					if (Main.chunkinfo == 1) {
-            						
-            						Main.chunkinfo = 0;
-            						p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Chunk Info Disabled!");
-            						
-            					} else if (Main.chunkinfo == 0) {
-            						
-            						p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Error: Chunk Info Already Disabled!");
-            						
-            					}
-            					
-            				} else {
-            					
-            					p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Syntax!");
-                				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Usage: " + ChatColor.ITALIC + "/bp chunkinfo <enable/disable>");
-            					
-            				}
-            				
-            			}
-            		
-            		} else if ((args[0].equalsIgnoreCase("settings")) && (p.hasPermission("bp.settings"))) {
-            			
-            			String getbiome = "";
-            			String chunkinfo = "";
-            			
-            			if (Main.getB == 1) {
-            				
-            				getbiome = ChatColor.GREEN + "Enabled";
-            				
-            			} else {
-            				
-            				getbiome = ChatColor.DARK_RED + "Disabled";
-            				
-            			}
-            			
-            			if (Main.chunkinfo == 1) {
-            				
-            				chunkinfo = ChatColor.GREEN + "Enabled";
-            				
-            			} else {
-            				
-            				chunkinfo = ChatColor.DARK_RED + "Disabled";
-            				
-            			}
-            			
-            			p.sendMessage("");
-        		    	p.sendMessage(ChatColor.DARK_GRAY + "----={<" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Settings" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
-        		    	p.sendMessage("");
-        		    	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "Get Biome " + ChatColor.WHITE + ":: " + getbiome);
-        		    	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "Chunk Info " + ChatColor.WHITE + ":: " + chunkinfo);
-        		    	p.sendMessage("");
-        		    	p.sendMessage(ChatColor.DARK_GRAY + "----=<{" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Settings" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
-        		    	p.sendMessage("");
-            			
-            		} else if ((args[0].equalsIgnoreCase("version")) && (p.hasPermission("bp.version"))) {
-        				
-            			String version = Bukkit.getServer().getPluginManager().getPlugin("BlockPalette").getDescription().getVersion();
-            			
-        				p.sendMessage("");
-        		    	p.sendMessage(ChatColor.DARK_GRAY + "----={<" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Version Info" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
-        		    	p.sendMessage("");
-        		    	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "Version Number " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + version);
-        		    	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "Author " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "EngineersBox");
-        		    	p.sendMessage("");
-        		    	p.sendMessage(ChatColor.DARK_GRAY + "----=<{" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Version Info" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
-        		    	p.sendMessage("");
-        		    
-            		} else if ((args[0].equalsIgnoreCase("reload")) && (p.hasPermission("bp.reload"))) {
-            			
-            			Main.config = YamlConfiguration.loadConfiguration(Main.cfile);
-            			
-            			p.sendMessage(Main.prefix + ChatColor.DARK_GREEN + "Reloading BlockPalette...");
-            			Plugin plugin = p.getServer().getPluginManager().getPlugin("BlockPalette");
-            			p.getServer().getPluginManager().disablePlugin(plugin);
-            			p.getServer().getPluginManager().enablePlugin(plugin);
-            			p.sendMessage(Main.prefix + ChatColor.DARK_GREEN + "Reload Complete!");
-        		    	
-            		} else if ((args[0].equalsIgnoreCase("biomelist")) && (p.hasPermission("bp.biomelist"))) {
-        				
-        				p.sendMessage("");
-        		    	p.sendMessage(ChatColor.DARK_GRAY + "----={<" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Biome List" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
-        		    	p.sendMessage("");
-        		    	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "plains " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Plains");
-        		    	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "desert " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Desert");
-        		    	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "extremehills " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Extreme Hills");
-        		    	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "forest " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Forest");
-        		    	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "savanna " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Savanna");
-        		    	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "taiga " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Taiga");
-        		    	p.sendMessage("");
-        		    	p.sendMessage(ChatColor.DARK_GRAY + "----=<{" + ChatColor.DARK_RED + "  [" + ChatColor.GOLD + "BlockPalette Biome List" + ChatColor.DARK_RED + "]  " + ChatColor.DARK_GRAY + "}>=----");
-        		    	p.sendMessage("");	
-        		    
-            		} else if ((args[0].equalsIgnoreCase("add")) && (p.hasPermission("bp.add"))) {
-            			
-            			if (args.length == 4) {
-            				
-            				String biome = args[1].toLowerCase();
-                			String block = args[2].toLowerCase();
-                			String name = args[3].toLowerCase();
-                			
-                			if (Material.matchMaterial(block.toUpperCase()) != null) {
-                				
-                				Main.mater = block.toUpperCase();
-                				
-                				if ((biome.equalsIgnoreCase("plains")) || (biome.equalsIgnoreCase("desert")) || (biome.equalsIgnoreCase("ocean")) || (biome.equalsIgnoreCase("forest")) || (biome.equalsIgnoreCase("savanna")) || (biome.equalsIgnoreCase("taiga")) || (biome.equalsIgnoreCase("extremehills"))) {
-                					
-                					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Added " + Main.mater + " [" + name + "]" + " To " + biome.substring(0, 1).toUpperCase() + biome.substring(1).toLowerCase());
-                					InvConfig.newInv(biome, block, name);
-                    				AbstractFile.saveConfig();
-                					
-                				} else {
-                					p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Biome!");
-                				}
-                				
-                			} else {
-                				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Block/Material!");
-                			}
-            				
-            			} else if (args.length < 4) {
-            				
-            				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Syntax!");
-            				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Usage: " + ChatColor.ITALIC + "/bp add <biome> <block> <name>");
-            				
-            			}
-            		
-            		} else if ((args[0].equalsIgnoreCase("remove")) && (p.hasPermission("bp.remove"))) {
-            			
-            			if (args.length == 4) {
-            				
-            				String biome = args[1].toLowerCase();
-                			String block = args[2].toLowerCase();
-                			String name = args[3].toLowerCase();
-                			
-                			if (Material.matchMaterial(block.toUpperCase()) != null) {
-                				
-                				Main.mater = block.toUpperCase();
-                				
-                				if ((biome.equalsIgnoreCase("plains")) || (biome.equalsIgnoreCase("desert")) || (biome.equalsIgnoreCase("ocean")) || (biome.equalsIgnoreCase("forest")) || (biome.equalsIgnoreCase("savanna")) || (biome.equalsIgnoreCase("taiga")) || (biome.equalsIgnoreCase("extremehills"))) {
-                					
-                					LoadInv.removeItemList(args[1], args[2], args[3]);
-                					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Removed " + Main.mater + " [" + name + "] From " + biome.substring(0, 1).toUpperCase() + biome.substring(1).toLowerCase());
-                    				
-                				} else {
-                					p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Biome!");
-                				}
-                				
-                			} else {
-                				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Block/Material!");
-                			}
-            				
-            			} else if (args.length < 4) {
-            				
-            				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Syntax!");
-            				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Usage: " + ChatColor.ITALIC + "/bp remove <biome> <block> <name>");
-            				
-            			}
-            		
-            		} else  if ((!p.hasPermission("help")) || (!p.hasPermission("tool")) || (!p.hasPermission("open")) || (!p.hasPermission("setbiome")) || (!p.hasPermission("getbiome")) || (!p.hasPermission("biomelist")) || (!p.hasPermission("chunkinfo")) || (!p.hasPermission("settings")) || (!p.hasPermission("add")) || (!p.hasPermission("version")) || (!p.hasPermission("reload"))) {	
-            		
-            			p.sendMessage(Main.prefix + ChatColor.RED + "You Do Not Have Permission!");
-            			
-            		} else {
-            			
-            			p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Command!");
-            			
-            		}
-            	}
-
-            	return true;
-            	
-            }
-            
-            return true;
-            
-        }
-        
-		return false;
-    
-    }
-
+public class Inventories {
+	
+	@EventHandler
+	public static void openStoredInv(InventoryClickEvent e, String invname) throws IllegalArgumentException {
+		
+		Player p = (Player) e.getWhoClicked();
+		
+		if (invname.equals("desert")) {
+			
+        	LoadInv.setItemList("desert");
+        	p.openInventory(Inventories.desert);
+			
+		} else if (invname.equals("plains")) {
+			
+        	LoadInv.setItemList("plains");
+        	p.openInventory(Inventories.plains);
+			
+		} else if (invname.equals("forest")) {
+			
+        	LoadInv.setItemList("forest");
+        	p.openInventory(Inventories.forest);
+			
+		} else if (invname.equals("extremehills")) {
+			
+        	LoadInv.setItemList("extremehills");
+        	p.openInventory(Inventories.extremehills);
+			
+		} else if (invname.equals("savanna")) {
+			
+        	LoadInv.setItemList("savanna");
+        	p.openInventory(Inventories.savanna);
+			
+		} else if (invname.equals("taiga")) {
+			
+        	LoadInv.setItemList("taiga");
+        	p.openInventory(Inventories.taiga);
+			
+		} else if (invname.equals("ocean")) {
+			
+        	LoadInv.setItemList("ocean");
+        	p.openInventory(Inventories.ocean);
+			
+		} else {
+			
+			p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Biome!");
+			throw new IllegalArgumentException();
+			
+		}
+		
+	}
+	
+	public final static Inventory main = Bukkit.createInventory(null, 9 * 3, ChatColor.DARK_RED + "           " + Main.prefix);
+		
+		static {
+			
+			ItemStack exit = new ItemStack(Material.OBSIDIAN);
+	        ItemMeta im0 = exit.getItemMeta();
+	        im0.setDisplayName(ChatColor.GRAY + "EXIT");
+	        exit.setItemMeta(im0);
+			
+			ItemStack plains = new ItemStack(Material.GRASS);
+	        ItemMeta im = plains.getItemMeta();
+	        im.setDisplayName(ChatColor.DARK_GREEN + "PLAINS");
+	        ArrayList<String> Lore = new ArrayList<String>();
+	        Lore.add(ChatColor.YELLOW + "Biome Palette");
+	        im.setLore(Lore);
+	        plains.setItemMeta(im);
+	        
+	        ItemStack desert = new ItemStack(Material.SAND);
+	        ItemMeta im1 = desert.getItemMeta();
+	        im1.setDisplayName(ChatColor.GOLD + "DESERT");
+	        ArrayList<String> Lore1 = new ArrayList<String>();
+	        Lore1.add(ChatColor.YELLOW + "Biome Palette");
+	        im1.setLore(Lore1);
+	        desert.setItemMeta(im1);
+	        
+	        ItemStack forest = new ItemStack(Material.LEAVES);
+	        ItemMeta im2 = forest.getItemMeta();
+	        im2.setDisplayName(ChatColor.GREEN + "FOREST");
+	        ArrayList<String> Lore2 = new ArrayList<String>();
+	        Lore2.add(ChatColor.YELLOW + "Biome Palette");
+	        im2.setLore(Lore2);
+	        forest.setItemMeta(im2);
+	        
+	        ItemStack extreme = new ItemStack(Material.STONE);
+	        ItemMeta im3 = extreme.getItemMeta();
+	        im3.setDisplayName(ChatColor.DARK_GRAY + "EXTREME HILLS");
+	        ArrayList<String> Lore3 = new ArrayList<String>();
+	        Lore3.add(ChatColor.YELLOW + "Biome Palette");
+	        im3.setLore(Lore3);
+	        extreme.setItemMeta(im3);
+	        
+	        ItemStack savanna = new ItemStack(Material.LOG_2);
+	        ItemMeta im4 = savanna.getItemMeta();
+	        im4.setDisplayName(ChatColor.DARK_RED + "SAVANNA");
+	        ArrayList<String> Lore4 = new ArrayList<String>();
+	        Lore4.add(ChatColor.YELLOW + "Biome Palette");
+	        im4.setLore(Lore4);
+	        savanna.setItemMeta(im4);
+	        
+	        ItemStack taiga = new ItemStack(Material.SNOW_BLOCK);
+	        ItemMeta im5 = taiga.getItemMeta();
+	        im5.setDisplayName(ChatColor.WHITE + "TAIGA");
+	        ArrayList<String> Lore5 = new ArrayList<String>();
+	        Lore5.add(ChatColor.YELLOW + "Biome Palette");
+	        im5.setLore(Lore5);
+	        taiga.setItemMeta(im5);
+	        
+	        ItemStack ocean = new ItemStack(Material.PRISMARINE);
+	        ItemMeta im6 = ocean.getItemMeta();
+	        im6.setDisplayName(ChatColor.DARK_BLUE + "OCEAN");
+	        ArrayList<String> Lore6 = new ArrayList<String>();
+	        Lore6.add(ChatColor.YELLOW + "Biome Palette");
+	        im6.setLore(Lore6);
+	        ocean.setItemMeta(im6);
+	        
+	        ItemStack pane = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 7);
+	        ItemMeta im7 = pane.getItemMeta();
+	        im7.setDisplayName(ChatColor.GRAY + "");
+	        pane.setItemMeta(im7);
+	        
+	        int slot = 0;
+	        
+	        while(slot < 27) {
+	        	
+	        	if((slot > 9) && (slot < 17) || (slot == 22)) {
+	        		
+	        		slot += 1;
+	        		
+	        	} else {
+	        		
+	        		main.setItem(slot, pane);
+	        		slot += 1;
+	        		
+	        	}
+	        }
+			
+	        main.setItem(10, plains);
+	        main.setItem(11, desert);
+	        main.setItem(12, forest);
+	        main.setItem(13, extreme);
+	        main.setItem(14, savanna);
+	        main.setItem(15, taiga);
+	        main.setItem(16, ocean);
+	        
+	        main.setItem(22, exit);
+	        
+		}
+	
+		public final static Inventory desert = Bukkit.createInventory(null, 9 * 5, Main.prefix + ChatColor.GOLD + "Desert");
+	
+		static {
+			
+			ItemStack exit = new ItemStack(Material.OBSIDIAN);
+	        ItemMeta im0 = exit.getItemMeta();
+	        im0.setDisplayName(ChatColor.GRAY + "EXIT");
+	        exit.setItemMeta(im0);
+	        
+	        ItemStack back = new ItemStack(Material.BOOK);
+	        ItemMeta im1 = back.getItemMeta();
+	        im1.setDisplayName(ChatColor.DARK_RED + "BACK TO MAIN");
+	        back.setItemMeta(im1);
+	        
+	        ItemStack prev = new ItemStack(Material.PAPER);
+	        ItemMeta im2 = prev.getItemMeta();
+	        im2.setDisplayName(ChatColor.AQUA + "Previous Page");
+	        prev.setItemMeta(im2);
+	
+	        ItemStack eye = new ItemStack(Material.EYE_OF_ENDER);
+	        ItemMeta im3 = eye.getItemMeta();
+	        im3.setDisplayName(ChatColor.DARK_PURPLE + "Page");
+	        eye.setItemMeta(im3);
+	        
+	        ItemStack next = new ItemStack(Material.PAPER);
+	        ItemMeta im4 = next.getItemMeta();
+	        im4.setDisplayName(ChatColor.DARK_GREEN + "Next Page");
+	        next.setItemMeta(im4);
+	        
+	        desert.setItem(39, prev);
+	        desert.setItem(40, eye);
+	        desert.setItem(41, next);
+	        
+	        desert.setItem(36, back);
+	        desert.setItem(44, exit);
+		}
+		
+		public final static Inventory plains = Bukkit.createInventory(null, 9 * 5, Main.prefix + ChatColor.DARK_GREEN + "Plains");
+	
+		static {
+			
+			ItemStack exit = new ItemStack(Material.OBSIDIAN);
+	        ItemMeta im0 = exit.getItemMeta();
+	        im0.setDisplayName(ChatColor.GRAY + "EXIT");
+	        exit.setItemMeta(im0);
+	        
+	        ItemStack back = new ItemStack(Material.BOOK);
+	        ItemMeta im1 = back.getItemMeta();
+	        im1.setDisplayName(ChatColor.DARK_RED + "BACK TO MAIN");
+	        back.setItemMeta(im1);
+	        
+	        ItemStack prev = new ItemStack(Material.PAPER);
+	        ItemMeta im2 = prev.getItemMeta();
+	        im2.setDisplayName(ChatColor.AQUA + "Previous Page");
+	        prev.setItemMeta(im2);
+	
+	        ItemStack eye = new ItemStack(Material.EYE_OF_ENDER);
+	        ItemMeta im3 = eye.getItemMeta();
+	        im3.setDisplayName(ChatColor.DARK_PURPLE + "Page");
+	        eye.setItemMeta(im3);
+	        
+	        ItemStack next = new ItemStack(Material.PAPER);
+	        ItemMeta im4 = next.getItemMeta();
+	        im4.setDisplayName(ChatColor.DARK_GREEN + "Next Page");
+	        next.setItemMeta(im4);
+	        
+	        plains.setItem(39, prev);
+	        plains.setItem(40, eye);
+	        plains.setItem(41, next);
+	        
+	        plains.setItem(36, back);
+	        plains.setItem(44, exit);
+		}
+		
+		public final static Inventory forest = Bukkit.createInventory(null, 9 * 5, Main.prefix + ChatColor.GREEN + "Forest");
+	
+		static {
+			
+			ItemStack exit = new ItemStack(Material.OBSIDIAN);
+	        ItemMeta im0 = exit.getItemMeta();
+	        im0.setDisplayName(ChatColor.GRAY + "EXIT");
+	        exit.setItemMeta(im0);
+	        
+	        ItemStack back = new ItemStack(Material.BOOK);
+	        ItemMeta im1 = back.getItemMeta();
+	        im1.setDisplayName(ChatColor.DARK_RED + "BACK TO MAIN");
+	        back.setItemMeta(im1);
+	        
+	        ItemStack prev = new ItemStack(Material.PAPER);
+	        ItemMeta im2 = prev.getItemMeta();
+	        im2.setDisplayName(ChatColor.AQUA + "Previous Page");
+	        prev.setItemMeta(im2);
+	
+	        ItemStack eye = new ItemStack(Material.EYE_OF_ENDER);
+	        ItemMeta im3 = eye.getItemMeta();
+	        im3.setDisplayName(ChatColor.DARK_PURPLE + "Page");
+	        eye.setItemMeta(im3);
+	        
+	        ItemStack next = new ItemStack(Material.PAPER);
+	        ItemMeta im4 = next.getItemMeta();
+	        im4.setDisplayName(ChatColor.DARK_GREEN + "Next Page");
+	        next.setItemMeta(im4);
+	        
+	        forest.setItem(39, prev);
+	        forest.setItem(40, eye);
+	        forest.setItem(41, next);
+	        
+	        forest.setItem(36, back);
+	        forest.setItem(44, exit);
+		}
+		
+		public final static Inventory extremehills = Bukkit.createInventory(null, 9 * 5, Main.prefix + ChatColor.DARK_GRAY + "Extreme Hills");
+	
+		static {
+			
+			ItemStack exit = new ItemStack(Material.OBSIDIAN);
+	        ItemMeta im0 = exit.getItemMeta();
+	        im0.setDisplayName(ChatColor.GRAY + "EXIT");
+	        exit.setItemMeta(im0);
+	        
+	        ItemStack back = new ItemStack(Material.BOOK);
+	        ItemMeta im1 = back.getItemMeta();
+	        im1.setDisplayName(ChatColor.DARK_RED + "BACK TO MAIN");
+	        back.setItemMeta(im1);
+	        
+	        ItemStack prev = new ItemStack(Material.PAPER);
+	        ItemMeta im2 = prev.getItemMeta();
+	        im2.setDisplayName(ChatColor.AQUA + "Previous Page");
+	        prev.setItemMeta(im2);
+	
+	        ItemStack eye = new ItemStack(Material.EYE_OF_ENDER);
+	        ItemMeta im3 = eye.getItemMeta();
+	        im3.setDisplayName(ChatColor.DARK_PURPLE + "Page");
+	        eye.setItemMeta(im3);
+	        
+	        ItemStack next = new ItemStack(Material.PAPER);
+	        ItemMeta im4 = next.getItemMeta();
+	        im4.setDisplayName(ChatColor.DARK_GREEN + "Next Page");
+	        next.setItemMeta(im4);
+	       
+	        extremehills.setItem(39, prev);
+	        extremehills.setItem(40, eye);
+	        extremehills.setItem(41, next);
+	        
+	        extremehills.setItem(36, back);
+	        extremehills.setItem(44, exit);
+		}
+		
+		public final static Inventory savanna = Bukkit.createInventory(null, 9 * 5, Main.prefix + ChatColor.DARK_RED + "Savanna");
+	
+		static {
+			
+			ItemStack exit = new ItemStack(Material.OBSIDIAN);
+	        ItemMeta im0 = exit.getItemMeta();
+	        im0.setDisplayName(ChatColor.GRAY + "EXIT");
+	        exit.setItemMeta(im0);
+	        
+	        ItemStack back = new ItemStack(Material.BOOK);
+	        ItemMeta im1 = back.getItemMeta();
+	        im1.setDisplayName(ChatColor.DARK_RED + "BACK TO MAIN");
+	        back.setItemMeta(im1);
+	        
+	        ItemStack prev = new ItemStack(Material.PAPER);
+	        ItemMeta im2 = prev.getItemMeta();
+	        im2.setDisplayName(ChatColor.AQUA + "Previous Page");
+	        prev.setItemMeta(im2);
+	
+	        ItemStack eye = new ItemStack(Material.EYE_OF_ENDER);
+	        ItemMeta im3 = eye.getItemMeta();
+	        im3.setDisplayName(ChatColor.DARK_PURPLE + "Page");
+	        eye.setItemMeta(im3);
+	        
+	        ItemStack next = new ItemStack(Material.PAPER);
+	        ItemMeta im4 = next.getItemMeta();
+	        im4.setDisplayName(ChatColor.DARK_GREEN + "Next Page");
+	        next.setItemMeta(im4);
+	        
+	        savanna.setItem(39, prev);
+	        savanna.setItem(40, eye);
+	        savanna.setItem(41, next);
+	        
+	        savanna.setItem(36, back);
+	        savanna.setItem(44, exit);
+		}
+		
+		public final static Inventory taiga = Bukkit.createInventory(null, 9 * 5, Main.prefix + ChatColor.WHITE + "Taiga");
+	
+		static {
+			
+			ItemStack exit = new ItemStack(Material.OBSIDIAN);
+	        ItemMeta im0 = exit.getItemMeta();
+	        im0.setDisplayName(ChatColor.GRAY + "EXIT");
+	        exit.setItemMeta(im0);
+	        
+	        ItemStack back = new ItemStack(Material.BOOK);
+	        ItemMeta im1 = back.getItemMeta();
+	        im1.setDisplayName(ChatColor.DARK_RED + "BACK TO MAIN");
+	        back.setItemMeta(im1);
+	        
+	        ItemStack prev = new ItemStack(Material.PAPER);
+	        ItemMeta im2 = prev.getItemMeta();
+	        im2.setDisplayName(ChatColor.AQUA + "Previous Page");
+	        prev.setItemMeta(im2);
+	
+	        ItemStack eye = new ItemStack(Material.EYE_OF_ENDER);
+	        ItemMeta im3 = eye.getItemMeta();
+	        im3.setDisplayName(ChatColor.DARK_PURPLE + "Page");
+	        eye.setItemMeta(im3);
+	        
+	        ItemStack next = new ItemStack(Material.PAPER);
+	        ItemMeta im4 = next.getItemMeta();
+	        im4.setDisplayName(ChatColor.DARK_GREEN + "Next Page");
+	        next.setItemMeta(im4);
+	        
+	        taiga.setItem(39, prev);
+	        taiga.setItem(40, eye);
+	        taiga.setItem(41, next);
+	        
+	        taiga.setItem(36, back);
+	        taiga.setItem(44, exit);
+		}
+		
+		public final static Inventory ocean = Bukkit.createInventory(null, 9 * 5, Main.prefix + ChatColor.DARK_BLUE + "Ocean");
+	
+		static {
+			
+			ItemStack exit = new ItemStack(Material.OBSIDIAN);
+	        ItemMeta im0 = exit.getItemMeta();
+	        im0.setDisplayName(ChatColor.GRAY + "EXIT");
+	        exit.setItemMeta(im0);
+	        
+	        ItemStack back = new ItemStack(Material.BOOK);
+	        ItemMeta im1 = back.getItemMeta();
+	        im1.setDisplayName(ChatColor.DARK_RED + "BACK TO MAIN");
+	        back.setItemMeta(im1);
+	        
+	        ItemStack prev = new ItemStack(Material.PAPER);
+	        ItemMeta im2 = prev.getItemMeta();
+	        im2.setDisplayName(ChatColor.AQUA + "Previous Page");
+	        prev.setItemMeta(im2);
+	
+	        ItemStack eye = new ItemStack(Material.EYE_OF_ENDER);
+	        ItemMeta im3 = eye.getItemMeta();
+	        im3.setDisplayName(ChatColor.DARK_PURPLE + "Page");
+	        eye.setItemMeta(im3);
+	        
+	        ItemStack next = new ItemStack(Material.PAPER);
+	        ItemMeta im4 = next.getItemMeta();
+	        im4.setDisplayName(ChatColor.DARK_GREEN + "Next Page");
+	        next.setItemMeta(im4);
+	        
+	        ocean.setItem(39, prev);
+	        ocean.setItem(40, eye);
+	        ocean.setItem(41, next);
+	        
+	        ocean.setItem(36, back);
+	        ocean.setItem(44, exit);
+		}
+	
 }
