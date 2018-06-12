@@ -5,12 +5,64 @@ import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class Inventories {
-
+	
+	@EventHandler
+	public static void openStoredInv(InventoryClickEvent e, String invname) throws IllegalArgumentException {
+		
+		Player p = (Player) e.getWhoClicked();
+		
+		if (invname.equals("desert")) {
+			
+        	LoadInv.setItemList("desert");
+        	p.openInventory(Inventories.desert);
+			
+		} else if (invname.equals("plains")) {
+			
+        	LoadInv.setItemList("plains");
+        	p.openInventory(Inventories.plains);
+			
+		} else if (invname.equals("forest")) {
+			
+        	LoadInv.setItemList("forest");
+        	p.openInventory(Inventories.forest);
+			
+		} else if (invname.equals("extremehills")) {
+			
+        	LoadInv.setItemList("extremehills");
+        	p.openInventory(Inventories.extremehills);
+			
+		} else if (invname.equals("savanna")) {
+			
+        	LoadInv.setItemList("savanna");
+        	p.openInventory(Inventories.savanna);
+			
+		} else if (invname.equals("taiga")) {
+			
+        	LoadInv.setItemList("taiga");
+        	p.openInventory(Inventories.taiga);
+			
+		} else if (invname.equals("ocean")) {
+			
+        	LoadInv.setItemList("ocean");
+        	p.openInventory(Inventories.ocean);
+			
+		} else {
+			
+			p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Biome!");
+			throw new IllegalArgumentException();
+			
+		}
+		
+	}
+	
 	public final static Inventory main = Bukkit.createInventory(null, 9 * 3, ChatColor.DARK_RED + "           " + Main.prefix);
 		
 		static {
