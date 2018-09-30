@@ -24,9 +24,16 @@ public class AbstractFile {
             }
         }
         AbstractFile.config = YamlConfiguration.loadConfiguration(file);
+        config.addDefault("plains", "");
+        config.addDefault("desert", "");
+        config.addDefault("ocean", "");
+        config.addDefault("forest", "");
+        config.addDefault("savanna", "");
+        config.addDefault("taiga", "");
+        config.addDefault("extremehills", "");
         config.options().copyDefaults(true);
     }
-   
+    
     public static void saveConfig() {
         try {
             config.save(file);
