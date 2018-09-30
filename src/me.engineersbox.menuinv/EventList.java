@@ -105,7 +105,7 @@ public class EventList implements Listener {
             return;
         }
 
-        if (slot >= 0 && slot < 9 * 3) {
+        if (slot >= 0 && slot < 9 * 5) {
             e.setCancelled(true);
             //p.sendMessage("Event Cancelled!"); //debug
         }
@@ -129,13 +129,17 @@ public class EventList implements Listener {
 	        	Main.i = 0;
 	        	p.openInventory(Inventories.main);
 	        
+	        } else if (e.getCurrentItem().getType() == Material.STAINED_GLASS_PANE) {
+	        	
+	        	return;
+	        	
 	        }
 	        
 	        if (e.getInventory().getTitle().equals(ChatColor.DARK_RED + "           " + Main.prefix)) { //main inventory
 	            
 	            if (e.getCurrentItem().getItemMeta() != null) {
 	            	
-	            	String currentItem = ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName().toLowerCase());
+	            	String currentItem = ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName().toLowerCase()).replaceAll(" ", "");
 	            	
 	            	if (Main.BiomeList.contains(currentItem)) {
 	            		
