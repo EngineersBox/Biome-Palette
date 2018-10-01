@@ -1,6 +1,6 @@
 name: BlockPalette
 main: me.engineersbox.menuinv.Main
-version: 1.6 Full Release
+version: 1.7 Full Release
 author: EngineersBox
 description: Block Biome Palettes
 commands:
