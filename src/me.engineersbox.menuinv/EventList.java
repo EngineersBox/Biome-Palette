@@ -104,13 +104,11 @@ public class EventList implements Listener {
         if (e.getSlot() == -999) {
             return;
         }
-
-        if (slot >= 0 && slot < 9 * 5) {
-            e.setCancelled(true);
-            //p.sendMessage("Event Cancelled!"); //debug
-        }
-        
-        if (e.getInventory().getTitle().contains(Main.prefix)) {
+      
+        if ((e.getInventory().getTitle().contains(Main.prefix)) && (slot >= 0 && slot < 9 * 5)) {
+        	
+        	e.setCancelled(true);
+        	
 	        if ((e.getCurrentItem() == null) || (e.getCurrentItem().getItemMeta() == null)) {
 	        	
 	        	return;
