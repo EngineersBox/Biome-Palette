@@ -1,6 +1,6 @@
 name: BlockPalette
 main: me.engineersbox.menuinv.Main
-version: 1.7 Full Release
+version: 1.8 Full Release
 author: EngineersBox
 description: Block Biome Palettes
 commands:
@@ -25,15 +25,23 @@ commands:
         usage: /bp getbiome <enable/disable>
         permission: bp.getbiome
     bp biomelist:
-        description: Gives Block Biome Tool
+        description: Displays All Valid Biomes
         usage: /bp biomelist
         permission: bp.biomelist
+    bp areareplace:
+        description: Replaces Specific Biome To Another Within Area Selection
+        usage: /bp areareplace <enable/disable>
+        permission: bp.areareplace
+    bp replaceto:
+        description: Specifies Biomes To Swap In Area Selection
+        usage: /bp replaceto <from> <to>
+        permission: bp.replaceto
     bp chunkinfo:
         description: Displays Chunk Data When Using /bp tool
         usage: /bp chunkinfo <enable/disable>
         permission: bp.chunkinfo
     bp settings:
-        description: View The Active Settings For /bp getbiome and /bpchunkinfo
+        description: View The Active Settings For /bp getbiome and /bp chunkinfo
         usage: /bp settings
         permission: bp.settings
     bp add:
@@ -41,7 +49,7 @@ commands:
         usage: /bp add <biome> <block> <name>
         permission: bp.add
     bp remove:
-        description: Adds A Block To The BlockPalette, Given Via Arguments
+        description: Removes A Block From The BlockPalette, Given Via Arguments
         usage: /bp remove <biome> <block> <name>
         permission: bp.remove
     bp version:
@@ -61,6 +69,8 @@ permissions:
             bp.tool: true
             bp.setbiome: true
             bp.getbiome: true
+            bp.areareplace: true
+            bp.replaceto: true
             bp.biomelist: true
             bp.chunkinfo: true
             bp.settings: true
@@ -82,6 +92,12 @@ permissions:
         default: op
     bp.getbiome:
         description: Gives Access To View Tool Active Biome
+        default: op
+    bp areareplace:
+        description: Replaces Specific Biome To Another Within Area Selection
+        default: op
+    bp replaceto:
+        description: Specifies Biomes To Swap In Area Selection
         default: op
     bp.biomelist:
         description: Gives Access To Valid Biomes
