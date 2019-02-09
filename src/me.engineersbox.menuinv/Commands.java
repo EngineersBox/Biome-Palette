@@ -120,6 +120,53 @@ public class Commands implements CommandExecutor {
             				}
             				
             			}
+            		
+            		} else if ((args[0].equalsIgnoreCase("replaceto")) && (p.hasPermission("bp.replaceto")) && (args.length > 2)) {
+            			
+            			for (int i = 1; i < 3; i++) {
+    						if ((args[i].equals("desert")) | (args[i].equals("plains")) | (args[i].equals("extremehills")) | (args[i].equals("forest")) | (args[i].equals("ocean")) | (args[i].equals("savanna")) | (args[i].equals("taiga"))) {
+    							Main.rplfromto.add(args[i]);
+    						} else {
+                				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Biome!");
+                				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "View Valid Biomes With: "  + ChatColor.ITALIC + "/bp biomelist");
+    						}
+            			}
+            			p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Biome From: " + Main.rplfromto.get(0) + " To: " + Main.rplfromto.get(1));
+            			
+            		} else if ((args[0].equalsIgnoreCase("areareplace")) && (p.hasPermission("bp.areareplace")) && (args.length > 1)) {
+            			
+            			if (args[1].equalsIgnoreCase("enable")) {
+            				
+            				if (Main.arpl == false) {
+            					
+            					Main.arpl = true;
+            					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Area Replace Biome Enabled!");
+            					
+            				} else if (Main.arpl == true) {
+            					
+            					p.sendMessage(Main.prefix + ChatColor.DARK_GREEN + "Error: Area Replace Biome Already Enabled!");
+            					
+            				}
+            				
+            			} else if (args[1].equalsIgnoreCase("disable")) {
+            				
+            				if (Main.arpl == true) {
+            					
+            					Main.arpl = false;
+            					p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Area Replace Biome Disabled!");
+            					
+            				} else if (Main.arpl == false) {
+            					
+            					p.sendMessage(Main.prefix + ChatColor.DARK_GREEN + "Error: Area Replace Biome Already Disabled!");
+            					
+            				}
+            				
+            			} else {
+            				
+            				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Invalid Syntax!");
+            				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Usage: " + ChatColor.ITALIC + "/bp areareplace <enable/disable>");
+            				
+            			}
             			
             		} else if ((args[0].equalsIgnoreCase("chunkinfo")) && (p.hasPermission("bp.chunkinfo"))) {
             			
