@@ -116,42 +116,55 @@ public class EventList implements Listener {
 						if (Main.poscount == 0) {
 							
 							Main.loc1 = event.getClickedBlock().getLocation();
-							p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Position 1 Registered");
+							p.sendMessage(Main.prefix + ChatColor.BLUE + "Position 1 Registered");
 							Main.poscount = 1;
 							
 						} else if (Main.poscount == 1) {
-							
 							Main.loc2 = event.getClickedBlock().getLocation();
-							p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Position 2 Registered");
+							p.sendMessage(Main.prefix + ChatColor.BLUE + "Position 2 Registered");
 							p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Replacing Biome From: " + biomefrom + " To: " + biometo + " ...");
+							Main.undobool = false;
+							if (Main.undolist != null) {
+								Main.undolist.clear();
+							}
+							Main.undolist = new ArrayList<Block>();
 							List<Block> blocklist = select(Main.loc1, Main.loc2, p.getWorld());
 							for (Block cb : blocklist) {
 								if (cb.getBiome().equals(retBiome(biomefrom))) {
+									Main.undobiome = retBiome(biomefrom);
 									if (biometo.equals("desert")) {
+										Main.undolist.add(cb);
 										cb.setBiome(Biome.DESERT);
 										cb.getChunk().getWorld().refreshChunk(cb.getChunk().getX(), cb.getChunk().getZ());
 									} else if (biometo.equals("plains")) {
+										Main.undolist.add(cb);
 										cb.setBiome(Biome.PLAINS);
 										cb.getChunk().getWorld().refreshChunk(cb.getChunk().getX(), cb.getChunk().getZ());
 									} else if (biometo.equals("extremehills")) {
+										Main.undolist.add(cb);
 										cb.setBiome(Biome.EXTREME_HILLS);
 										cb.getChunk().getWorld().refreshChunk(cb.getChunk().getX(), cb.getChunk().getZ());
 									} else if (biometo.equals("forest")) {
+										Main.undolist.add(cb);
 										cb.setBiome(Biome.FOREST);
 										cb.getChunk().getWorld().refreshChunk(cb.getChunk().getX(), cb.getChunk().getZ());
 									} else if (biometo.equals("ocean")) {
+										Main.undolist.add(cb);
 										cb.setBiome(Biome.OCEAN);
 										cb.getChunk().getWorld().refreshChunk(cb.getChunk().getX(), cb.getChunk().getZ());
 									} else if (biometo.equals("savanna")) {
+										Main.undolist.add(cb);
 										cb.setBiome(Biome.SAVANNA);
 										cb.getChunk().getWorld().refreshChunk(cb.getChunk().getX(), cb.getChunk().getZ());
 									} else if (biometo.equals("taiga")) {
+										Main.undolist.add(cb);
 										cb.setBiome(Biome.TAIGA);
 										cb.getChunk().getWorld().refreshChunk(cb.getChunk().getX(), cb.getChunk().getZ());
 									}
 								}
 							}
 							
+							Main.undobool = true;
 							Main.poscount = 0;
 							Main.loc1 = null;
 							Main.loc2 = null;
