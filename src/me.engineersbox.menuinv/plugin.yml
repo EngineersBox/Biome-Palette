@@ -36,6 +36,10 @@ commands:
         description: Specifies Biomes To Swap In Area Selection
         usage: /bp replaceto <from> <to>
         permission: bp.replaceto
+    bp undo:
+        description: Returns Most Recent Biome Replacement from /bp areareplace To Original Biome
+        usage: /bp undo
+        permission: bp.undo
     bp chunkinfo:
         description: Displays Chunk Data When Using /bp tool
         usage: /bp chunkinfo <enable/disable>
@@ -71,6 +75,7 @@ permissions:
             bp.getbiome: true
             bp.areareplace: true
             bp.replaceto: true
+            bp.undo: true
             bp.biomelist: true
             bp.chunkinfo: true
             bp.settings: true
@@ -98,6 +103,9 @@ permissions:
         default: op
     bp replaceto:
         description: Specifies Biomes To Swap In Area Selection
+        default: op
+    bp undo:
+        description: Returns Most Recent Biome Replacement from /bp areareplace To Original Biome
         default: op
     bp.biomelist:
         description: Gives Access To Valid Biomes
