@@ -1,8 +1,11 @@
 package me.engineersbox.menuinv;
 
+import java.util.ArrayList;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,6 +16,7 @@ import me.engineersbox.menuinv.InvConfig;
 
 public class Commands implements CommandExecutor {
 
+	@SuppressWarnings("deprecation")
 	@Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
     	
@@ -39,6 +43,8 @@ public class Commands implements CommandExecutor {
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp setbiome <biome>" + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Sets The Biome To Be Used with /bp tool");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp getbiome <enable/disable> " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Changes Tool To Identify The Biome Of A Selected Block");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp biomelist " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays The Valid Biomes For /bp tool biome");
+	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp areareplace <enbale/disable> " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Replaces Specific Biome To Another Within Area Selection Made With /bp tool");
+	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp repalceto <from> <to> " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Specifies Biomes To Swap In Area Selection");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp chunkinfo <enable/disable> " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays Chunk Data When Using /bp tool");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp settings " + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Displays Current chunkinfo and getbiome Settings");
 	                	p.sendMessage(ChatColor.BLACK + "> " + ChatColor.DARK_GREEN + "/bp add <biome> <block> <name>" + ChatColor.WHITE + ":: " + ChatColor.DARK_RED + "Adds A Block To The BlockPalette, Given Via Arguments");
@@ -121,7 +127,27 @@ public class Commands implements CommandExecutor {
             				
             			}
             		
+            		} else if ((args[0].equalsIgnoreCase("undo")) && (p.hasPermission("bp.undo"))) {
+            			
+            			if (Main.undobool == true) {
+            				
+            				for (Block cb : Main.undolist) {
+            					cb.setBiome(Main.undobiome);
+								cb.getChunk().getWorld().refreshChunk(cb.getChunk().getX(), cb.getChunk().getZ());
+							}
+            				
+            				Main.undobool = false;
+            				p.sendMessage(Main.prefix + ChatColor.DARK_AQUA + "Biomes Reverted");
+            				
+            			} else {
+            				
+            				p.sendMessage(Main.prefix + ChatColor.DARK_PURPLE + "Nothing To Undo!");
+            				
+            			}
+            			
             		} else if ((args[0].equalsIgnoreCase("replaceto")) && (p.hasPermission("bp.replaceto")) && (args.length > 2)) {
+            			
+            			Main.rplfromto = new ArrayList<String>();
             			
             			for (int i = 1; i < 3; i++) {
     						if ((args[i].equals("desert")) | (args[i].equals("plains")) | (args[i].equals("extremehills")) | (args[i].equals("forest")) | (args[i].equals("ocean")) | (args[i].equals("savanna")) | (args[i].equals("taiga"))) {
