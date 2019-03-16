@@ -1,4 +1,5 @@
 # BlockPalette
+<img src="https://media.forgecdn.net/avatars/186/491/636834062293308662.png" width=100px height=100px>
 
 ## Features
 This plugin allows players to view biome specific textures of blocks within a GUI. The GUI is navigable as the textures are classified by biome, via page format. The textures are dependant on the CTM section within a resource pack (requires optifine). The other features of this plugin are; the ability change the biome of a specific block or change a specific biome to another within a given area, get the location of a selected chunk and get the location of a selected block (both in X, Z terms).
