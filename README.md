@@ -3,11 +3,11 @@
 ## Features
 This plugin allows players to view biome specific textures of blocks within a GUI. The GUI is navigable as the textures are classified by biome, via page format. The textures are dependant on the CTM section within a resource pack (requires optifine). The other features of this plugin are; the ability change the biome of a specific block or change a specific biome to another within a given area, get the location of a selected chunk and get the location of a selected block (both in X, Z terms).
 
-The main menu of the GUI:
-![GUI Main Menu]:(https://i.ibb.co/pJ2twDN/main-menu.png)
+The main menu of the GUI:\
+![GUI Main Menu](https://i.ibb.co/pJ2twDN/main-menu.png)
 
-Plains tab of the GUI:
-![Plains Tab]:(https://i.ibb.co/kG2XyYH/plains-menu.png)
+Plains tab of the GUI:\
+![Plains Tab](https://i.ibb.co/kG2XyYH/plains-menu.png)
 
 ---
 
